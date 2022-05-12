@@ -10,12 +10,10 @@
 <body>
     <?php 
     include 'assets/include/navbar.php'; 
-    include 'assets/include/filtre.php'; 
-    include 'assets/include/cards.php'; 
+    include 'assets/include/scanner.php';  
     include 'assets/include/footer.php'; 
     
     ?>
-     <script src="assets/js/sliderprix.js"></script>
      <script src="assets/js/navbar.js"></script>
 </body>
 </html>

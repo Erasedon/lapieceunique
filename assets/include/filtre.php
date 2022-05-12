@@ -73,9 +73,10 @@
                 <form action="" method="GET">
                     <div class="card shadow mt-3">
                         <div class="card-header">
-                            <h5>Filtre
-                                <button type="submit" class="button-filtre">Chercher</button>
-                            </h5>
+                            <h5>Filtre: </h5>
+                            <h6>Poster</h6>
+                            <h6>POP</h6>
+                            <h6>Jeu d'occasion</h6>
                         </div>
                         <div class="card-body">
                             <h6>Genre</h6>
@@ -155,7 +156,7 @@
 
                     // echo "get prix : ";
                     // echo $_GET['prix3'];
-                            if (empty($_GET['prix3'])){$valeur = "150";}
+                            if (empty($_GET['prix3'])){$valeur = "200";}
                             if (!empty($_GET['prix3'])) {
                                                                
                                 $valeur = $_GET['prix3'];
@@ -165,12 +166,14 @@
                     
                         <div class="slidecontainer">
                         <p>Choisis ton prix max</p>
-                            <input type="range" name="prix3" min="1" max="150" value="<?php echo $valeur; ?>" class="slider" id="myRange" style="background-color:#000; height:4px; width:200px">
-                            <p>Prix: <span id="demo"></span>€ max</p>
+                            <input type="range" name="prix3" min="1" max="200" value="<?php echo $valeur; ?>" class="slider" id="myRange" style="background-color:#000; height:4px; width:200px">
+                            <p>Prix: <span id="demo"></span> € aux max</p>
+                        </div>
+                        <div class="slidecontainer">
+                        <button type="submit" class="button-filtre">Chercher</button>
                         </div>
                     </div>
-
-
+                    
                 </form>
                 
                 
