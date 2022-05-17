@@ -10,6 +10,7 @@
   }
 
   
+
 /* Nav */
 #navbar {
     position: sticky;
@@ -17,9 +18,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(236, 240, 241, 0.7); /* = #ecf0f1 + opacity */
+    background-color: #000; /* = #ecf0f1 + opacity */
     backdrop-filter: blur(4px);
-    color: #005f89;
+    color: #000;
     z-index: 999;
 }
 
@@ -48,13 +49,13 @@
 
 #nav-links li a {
     text-decoration: none;
-    color: #005f89;
+    color: #fff;
     padding: 1rem;
     display: block;
 }
 
 #nav-links a:hover {
-    color: #0093b7;
+    color: #f8c913;
 }
 /* Nav Burger */
 #nav-toggle-button {
@@ -72,7 +73,7 @@
 #nav-toggle-button .nav-toggle-bar1 {
     height: 3px;
     width: 100%;
-    background-color: #005f89;
+    background-color: #f8c913;
     background-color: 10px;
     transition: .5s ease-in-out;
 }
@@ -80,7 +81,7 @@
 #nav-toggle-button .nav-toggle-bar2 {
     height: 3px;
     width: 100%;
-    background-color: #005f89;
+    background-color: #f8c913;
     background-color: 10px;
     transition: .5s ease;
 }
@@ -88,7 +89,7 @@
 #nav-toggle-button .nav-toggle-bar3 {
     height: 3px;
     width: 100%;
-    background-color: #005f89;
+    background-color: #f8c913;
     background-color: 10px;
     transition: .5s ease-in-out;
 }
@@ -145,6 +146,8 @@
 }
 
 /* Fin nav*/
+
+
 
 .categorie {
     display: block;
@@ -349,3 +352,221 @@ font-size: 13Px;
   .slidecontainer p{
       margin-top: 10px;
   }
+  /* occasion */
+
+  
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+    font-family: 'Oswald_Light';
+}
+
+.inscription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px rgb(210, 210, 210);
+    border-radius: 5px;
+    width: 40%;
+    margin-bottom: 100px;
+}
+
+.connexion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px rgb(210, 210, 210);
+    border-radius: 5px;
+    width: 30%;
+    margin-bottom: 100px;
+}
+
+.sucess {
+    color: lime;
+}
+
+.error {
+    color: red;
+}
+
+h3 {
+    font-size: 250%;
+    margin: 15px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+.model_un {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 5px 0;
+}
+
+.nom {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.prenom {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.nom label, .nom input, .prenom label, .prenom input {
+    font-size: 130%;
+    width: 100%;
+}
+
+.nom input, .prenom input, .model_deux input {
+    align-items: flex-start;
+    width: 90%;
+}
+
+.titr_la {
+    font-size: 130%;
+    margin: 5px 15px;
+    width: 90%;
+}
+
+.titr_lac {
+    font-size: 130%;
+    margin: 5px 15px;
+    width: 50%;
+}
+
+
+.titr_in {
+    font-size: 130%;
+    margin: 3px 15px;
+    width: 90%;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+.titr_inc {
+    font-size: 130%;
+    margin: 3px 15px;
+    width: 50%;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+
+.model_deux {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.model_deux label, .model_deux input {
+    font-size: 130%;
+    width: 90%;
+}
+
+.model_trois {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    margin: 5px 0;
+}
+
+.femme {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 30% !important;
+    font-size: 120%;
+}
+
+.homme {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 31.2% !important;
+    font-size: 120%;
+}
+
+.conditions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    width: 90%;
+}
+
+.conditions input {
+    margin-right: 5px;
+}
+
+.confident {
+    text-decoration: underline;
+}
+
+.confident:hover {
+    color: gray;
+}
+
+.aide {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 15px;
+    width: 90%;
+}
+
+.checkbox {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.mdp_oublie {
+    text-decoration: underline;
+    color: black;
+    margin: 0 5px;
+}
+
+.sub {
+    margin: 10px 25px;
+    padding: 5px 25px;
+    font-size: 120%;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-family: 'Oswald';
+    align-self: center;
+}
+
+.co_ins {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 10px;
+}

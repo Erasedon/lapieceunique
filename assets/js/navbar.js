@@ -25,7 +25,7 @@ toggleButton.addEventListener('click', () => {;
         toggleButton.classList.add('open-hamburger');
     } else {
         toggleButton.classList.remove('open-hamburger')
-        toggleButton = false;
+        toggleButton = false
     }
 })
 
