@@ -132,20 +132,7 @@ $id_login = $_SESSION['id'];
         <div class="titre2">Taille : </div>
         
         <div class="titre2" id="afficher">
-            
-            <select name="tailles" id="tailles">
-                <option value="">--Choisir une taille--</option>
-                <?php 
-                        while ($affichedetail2 = $requetedetail2->fetch())
-                        {
-                            ?>
-                                <option value="<?php echo $affichedetail2['id_tailles'];?>">
-                                    <?php echo $affichedetail2['taille_tailles'];?></option>
-                                    <?php
-                        }
-                        ?>
-
-</select>
+        <div class="titre2"><?php echo $affichearticle['prix_articles']; ?> €</div>
 
 <?php
                         $sqldetail3 = "SELECT c.couleur_couleurs AS couleurs, c.id_couleurs AS id, COUNT(*) AS nombres FROM articles a, stocks s, tailles t, couleurs c 
@@ -166,22 +153,10 @@ $id_login = $_SESSION['id'];
     <div class="titre2"><?php echo $affichearticle['prix_articles']; ?> €</div>
 </div>
 <div class="detail1">
-    <div class="titre2">Couleur : </div>
+    <div class="titre2">Quantite : </div>
     <div class="titre2 afficher">
-        
-        <select name="couleurs" id="couleurs" onchange="getPhoto(this.value);">
-            <option value="">--Choisir une couleur--</option>
-            <?php 
-                        while ($affichedetail3 = $requetedetail3->fetch())
-                        {
-                            ?>
-                                <option value="<?php echo $affichedetail3['id'];?>">
-                                    <?php echo $affichedetail3['couleurs'];?></option>
-                                    <?php
-                        }
-                        ?>
-
-</select>
+    <div class="titre4"></div>
+    <div class="titre2"><?php echo $affichearticle['couleur']; ?></div>
 
 </div>
 </div>
@@ -199,17 +174,17 @@ $id_login = $_SESSION['id'];
     <input type="hidden" value="1" name="quantite">
     
     <button type="submit" class="boutonajoutpanier">
-        <i class='fa-solid fa-bag-shopping'></i> Ajouter au panier
+        <i class='fa-solid fa-bag-shopping'></i> Retour
     </button>
                     </form>
 </div>
-
+<!-- 
 <div class="inforetour">
     <i class="fa-solid fa-check"></i> Tout nos articles sont fabriqués en France<br>
     <i class="fa-solid fa-check"></i> 30 jours pour changer d'avis<br>
     <i class="fa-solid fa-check"></i> Retour gratuit<br>
     <i class="fa-solid fa-check"></i> Livraison offerte<br>
-</div>
+</div> -->
 
 
 
@@ -218,109 +193,6 @@ $id_login = $_SESSION['id'];
 
 </div><!-- fin article -->
 
-<div class="commentairesarticle" id="commentaire">
-    
-    <?php
-
-if (isset($_SESSION['id']))
-{
-
-$id_login = $_SESSION['id'];
-if (isset($_GET["action"]))
-{
-    if ($_GET["action"] == 'com')
-    {
-        $sqldanscomms= "SELECT COUNT(*) AS nombres FROM commentaires
-                WHERE id_utilisateurs = :id_utilisateur and id_articles=:id_articles";
-                $requetedanscomms = $db->prepare($sqldanscomms);
-                $requetedanscomms->execute(array(
-                    ":id_utilisateur" => $id_login,
-                    ":id_articles" => $_GET['id_article']
-                ));
-                $affichedanscomms = $requetedanscomms->fetch();
-                
-                if ($affichedanscomms['nombres'] >= 1 ) {echo "Vous avez déjà écris un commentaire<br>";}
-                else {
-                    
-                    $heure =  date('Y-m-d H:i:s');
-                    
-                    $sqlajoutcommentaire = "INSERT INTO commentaires (commentaire_commentaires, date_commentaires, id_articles, id_utilisateurs) VALUES (:commentaire, :heure, :id_articles, :id_utilisateur)";
-                    $requeteajoutcommentaire = $db->prepare($sqlajoutcommentaire);
-                    $requeteajoutcommentaire->execute(array(
-                        ":commentaire" => $_POST['commentaire'],
-                        ":heure" => $heure,
-                        ":id_utilisateur" => $id_login,
-                        ":id_articles" => $_GET['id_article']    
-                    ));
-                    
-                    echo "Votre commentaire est ajouté<br>";
-                }
-            }
-
-            if ($_GET["action"] == 'comsuppr')
-            {
-
-                $sql = "DELETE FROM commentaires WHERE id_utilisateurs = :id_utilisateur and id_articles=:id_articles";
-                $requete = $db->prepare($sql);
-                $requete->execute(array(
-                    ":id_utilisateur" => $id_login,
-                    ":id_articles" => $_GET['id_article']
-                ));
-
-                echo "Votre commentaire est maintenant supprimé, vous pouvez en ajouter un nouveau<br><br>";
-            }
-        }
-
-        
-        $sqldanscomms= "SELECT COUNT(*) AS nombres FROM commentaires
-        WHERE id_utilisateurs = :id_utilisateur and id_articles=:id_articles";
-        $requetedanscomms = $db->prepare($sqldanscomms);
-        $requetedanscomms->execute(array(
-            ":id_utilisateur" => $id_login,
-            ":id_articles" => $_GET['id_article']
-        ));
-        $affichedanscomms = $requetedanscomms->fetch();
-        
-        
-        if ($affichedanscomms['nombres'] >= 1){
-            echo "Vous avez déjà posté un commentaire vous pouvez le supprimer <a href='article.php?id_article=".$_GET['id_article']."&action=comsuppr#commentaire'><i class='fa-solid fa-trash-can'></i></a><br><br>";
-        }
-        if ($affichedanscomms['nombres'] <= 0 ){ 
-           
-          
-           ?>
-
-    <form action="article.php?id_article=<?php echo $_GET['id_article'];?>&action=com#commentaire" method="POST">
-    <textarea name="commentaire" placeholder="Ecrire un commentaire" class="commentairestexte" max-lenght="255"></textarea><br>
-    <input type="submit"  class="boutonajoutcommentaire" value="Poster mon commentaire">
-    </form>
-
-        <?php
-        }
-    }
-        
-        $sqlaffichecomms= "SELECT * FROM commentaires c, utilisateurs u
-        WHERE  c.id_utilisateurs=u.id_utilisateurs
-        AND c.id_articles=:id_articles";
-        $requeteaffichecomms = $db->prepare($sqlaffichecomms);
-        $requeteaffichecomms->execute(array(
-            ":id_articles" => $_GET['id_article']
-        ));
-        while ($afficheaffichecomms = $requeteaffichecomms->fetch())
-        {
-            ?>
-                    De : <?php echo $afficheaffichecomms['prenom_utilisateurs'];?> le <?php echo $afficheaffichecomms['date_commentaires'];?> <br>        
-                    <?php echo $afficheaffichecomms['commentaire_commentaires'];?><br>
-                    
-                    <div class="hr-perso"></div>
-                    
-                    <?php
-        }
-        
-        ?>
-
-
-</div>
 
 <br><br><br><br>
 

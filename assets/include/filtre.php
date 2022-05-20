@@ -3,9 +3,9 @@
     include 'assets/db/connectdb.php'; 
     
     ?>
-
+              
 <div class="container cat">
-    
+      
             <?php
 
             // ici la requete si on a que le genre
@@ -54,10 +54,10 @@
             $requete->execute();
 
         ?>
-
         <h1 style="text-align:center;">
-            <?php  echo  $affichearticle; ?>
-        </h1>
+                    <?php  echo  $affichearticle; ?>
+                </h1>
+     
         <?php
         
         
@@ -74,9 +74,7 @@
                     <div class="card shadow mt-3">
                         <div class="card-header">
                             <h5>Filtre: </h5>
-                            <h6>Poster</h6>
-                            <h6>POP</h6>
-                            <h6>Jeu d'occasion</h6>
+                           
                         </div>
                         <div class="card-body">
                             <h6>Genre</h6>
@@ -166,7 +164,7 @@
                     
                         <div class="slidecontainer">
                         <p>Choisis ton prix max</p>
-                            <input type="range" name="prix3" min="1" max="200" value="<?php echo $valeur; ?>" class="slider" id="myRange" style="background-color:#000; height:4px; width:200px">
+                            <input type="range" name="prix3" min="1" max="200" value="<?php echo $valeur; ?>" class="slider" id="myRange" style="background-color:#000; height:4px; width:138px">
                             <p>Prix: <span id="demo"></span> € aux max</p>
                         </div>
                         <div class="slidecontainer">
@@ -177,7 +175,7 @@
                 </form>
                 
                 
-                
+           
 
             </div>
 
