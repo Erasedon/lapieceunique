@@ -1,5 +1,5 @@
 <?php
-
+include 'assets/include/traitement/traitementscanner.php';
 // $client = new http\Client;
 // $request = new http\Client\Request;
 

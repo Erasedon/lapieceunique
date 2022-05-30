@@ -160,13 +160,17 @@
     transition: 500ms ease;
     font-size: 110%;
 }
+.cat {
+    display: flex;
+    flex-direction: column;
+}
 
 .container-filtre-tb{
     width: 100%;
     display: flex;
 }
 .categorie-filtre-tb {
-    width: 15%;
+    width: 16%;
     
   }
 
@@ -198,8 +202,8 @@
     font-size: 11px;
     letter-spacing: 2.5px;
     font-weight: 500;
-    color: #fff;
-    background-color: #963420;
+    color: #f8d862;
+    background-color: #000;
     border: none;
     border-radius: 10px;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -209,8 +213,8 @@
   }
     
 .button-filtre:hover{
-    background-color: #df8270;
-    box-shadow: 0px 15px 20px #df83704b;
+    background-color: #000;
+    box-shadow: 0px 15px 20px #bd9813;
     color: #fff;
     transform: translateY(-7px);
 }
@@ -218,6 +222,16 @@
 .card-body h6{
     font-weight: 200;
 font-size: 13Px;
+}
+
+.card-body h6 {
+    margin-left: 50px;
+
+}
+
+.card-body div {
+    margin-left: 9px;
+
 }
 .border img{
     width: 100%;

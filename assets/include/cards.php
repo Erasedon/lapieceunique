@@ -1,6 +1,8 @@
 <div class="categorie-tb">
 
-<?php
+<?php     
+        $con->set_charset("utf8");
+
                 if ((isset($_GET['genress'])) && (empty($_GET['sous_cat2'])))
                 {
                     $branchecked = [];
@@ -9,6 +11,7 @@
                     {
                         $products = "SELECT * FROM articles WHERE id_genres IN ($rowbrand) AND prix_articles <= ".$_GET['prix3']."";
                         $products_run = mysqli_query($con, $products);
+                   
                         if(mysqli_num_rows($products_run) > 0)
                         {
                             foreach($products_run as $proditems) :
@@ -17,13 +20,11 @@
     <div class="border">
         <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
             <ul>
-                <li><img src="assets/img/<?= $proditems['image1_articles']; ?>"></li>
+                <li><img src="<?= $proditems['image1_articles']; ?>"></li>
                 <li>
-                    <h6><?= $proditems['nom_articles']; ?></h6>
+                    <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
                 </li>
-                <li>
-                    <h6><?= $proditems['prix_articles']; ?>€</h6>
-                </li>
+                                
             </ul>
         </a>
     </div>
@@ -33,7 +34,34 @@
                         }
                     
                 }
+                }else{
+                
+                   
+                        $products = "SELECT * FROM articles WHERE id_genres";
+                        $products_run = mysqli_query($con, $products);
+                        if(mysqli_num_rows($products_run) > 0)
+                        {
+                            foreach($products_run as $proditems) :
+                                ?>
+<div class="test-tb">
+    <div class="border">
+        <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
+            <ul>
+                <li><img src="<?= $proditems['image1_articles']; ?>"></li>
+                <li>
+                    <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
+                </li>
+                                
+            </ul>
+        </a>
+    </div>
+</div>
+<?php
+                            endforeach;
+                        }
+                    
                 }
+                
 
 
                 if ((empty($_GET['genress'])) && (isset($_GET['sous_cat2'])))
@@ -56,12 +84,9 @@
     <div class="border">
         <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
             <ul>
-                <li><img src="assets/img/<?= $proditems['image1_articles']; ?>"></li>
+                <li><img src="<?= $proditems['image1_articles']; ?>"></li>
                 <li>
-                    <h6><?= $proditems['nom_articles']; ?></h6>
-                </li>
-                <li>
-                    <h6><?= $proditems['prix_articles']; ?>€</h6>
+                    <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
                 </li>
             </ul>
         </a>
@@ -99,13 +124,11 @@
     <div class="border">
         <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
             <ul>
-                <li><img src="assets/img/<?= $proditems['image1_articles']; ?>"></li>
+                <li><img src="<?= $proditems['image1_articles']; ?>"></li>
                 <li>
-                    <h6><?= $proditems['nom_articles']; ?></h6>
+                    <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
                 </li>
-                <li>
-                    <h6><?= $proditems['prix_articles']; ?>€</h6>
-                </li>
+               
             </ul>
         </a>
     </div>
@@ -118,39 +141,63 @@
                 }
                 }
                 
-                if ((empty($_GET['genress'])) && (empty($_GET['sous_cat2'])) && (empty($_GET['genres'])))
+                if ((!empty($_GET['genress'])) && (!empty($_GET['sous_cat2'])) && (!empty($_GET['genres'])))
                 {
 
                     // $branchecked3 = $_GET['prix3'];
 
-              
+                    $products4 = "SELECT * FROM articles WHERE prix_articles";
+                    $products_run4 = mysqli_query($con, $products4);
+                    if(mysqli_num_rows($products_run4) > 0)
+                    {
+                        foreach($products_run4 as $proditems) :
+                            ?>
+                        <div class="test-tb">
+                        <div class="border">
+                            <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
+                                <ul>
+                                    <li><img src="<?= $proditems['image1_articles']; ?>"></li>
+                                    <li>
+                                        <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
+                                    </li>
+                                
+                                </ul>
+                            </a>
+                        </div>
+                        </div>
+                    <?php
+                        endforeach;
 
-                        $products = "SELECT * FROM articles WHERE prix_articles <= ".$_GET['prix3']."";
-                        $products_run = mysqli_query($con, $products);
-                        if(mysqli_num_rows($products_run) > 0)
-                        {
-                            foreach($products_run as $proditems) :
-                                ?>
-<div class="test-tb">
-    <div class="border">
-        <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
-            <ul>
-                <li><img src="assets/img/<?= $proditems['image1_articles']; ?>"></li>
-                <li>
-                    <h6><?= $proditems['nom_articles']; ?></h6>
-                </li>
-                <li>
-                    <h6><?= $proditems['prix_articles']; ?>€</h6>
-                </li>
-            </ul>
-        </a>
-    </div>
-</div>
-<?php
-                            endforeach;
+                      
+                        }
+              
+                }else{
+                    $products = "SELECT * FROM articles WHERE prix_articles <= ".$_GET['prix3']."";
+                    $products_run = mysqli_query($con, $products);
+                    if(mysqli_num_rows($products_run) > 0)
+                    {
+                        foreach($products_run as $proditems) :
+                                                    ?>
+                    <div class="test-tb">
+                        <div class="border">
+                            <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
+                                <ul>
+                                    <li><img src="<?= $proditems['image1_articles']; ?>"></li>
+                                    <li>
+                                        <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
+                                    </li>
+                                
+                                </ul>
+                            </a>
+                        </div>
+                    </div>
+                    <?php
+                        endforeach;
                         }
               
                 }
+                   
+                
             ?>
             
 
@@ -171,7 +218,7 @@ foreach ($requete as $row)
 
     <ul>
         <a href="poster.php?id_article=<?php echo $row['id_articles'];?>">
-            <li><img src="assets/img/<?php echo $row['image1_articles'];?>" alt=""></li>
+            <li><img src="<?php echo $row['image1_articles'];?>" alt=""></li>
             <li>
                 <?php
             echo $row['nom_articles'];

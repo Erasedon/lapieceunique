@@ -40,15 +40,15 @@ $affichearticle = $requetearticle->fetch();
           
           <div class="photogauche">
               <div class="photo" onclick="choixPhoto(0)" id="photo1">
-                <img src="assets/img/<?php echo $affichearticle['image1_articles']; ?>"
+                <img src="<?php echo $affichearticle['image1_articles']; ?>"
                 alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
                 
                 <div class="photo" onclick="choixPhoto(1)" id="photo2">
-                    <img src="assets/img/<?php echo $affichearticle['image2_articles']; ?>"
+                    <img src="<?php echo $affichearticle['image2_articles']; ?>"
                     alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
                     
                 <div class="photo" onclick="choixPhoto(2)" id="photo3">
-                    <img src="assets/img/<?php echo $affichearticle['image3_articles']; ?>"
+                    <img src="<?php echo $affichearticle['image3_articles']; ?>"
                     alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
                 </div>
                 
@@ -57,13 +57,13 @@ $affichearticle = $requetearticle->fetch();
                 <div class="photoarticle">
                     
                     <div class="photo2 active" id="photo0">
-                        <img id="image1" src="assets/img/<?php echo $affichearticle['image1_articles']; ?>"
+                        <img id="image1" src="<?php echo $affichearticle['image1_articles']; ?>"
                         alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
                         <div class="photo2" id="photo22">
-                            <img src="assets/img/<?php echo $affichearticle['image2_articles']; ?>"
+                            <img src="<?php echo $affichearticle['image2_articles']; ?>"
                             alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
                             <div class="photo2" id="photo33">
-                                <img src="assets/img/<?php echo $affichearticle['image3_articles']; ?>"
+                                <img src="<?php echo $affichearticle['image3_articles']; ?>"
                                 alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
                             </div>
                             
@@ -171,10 +171,9 @@ $id_login = $_SESSION['id'];
 
 <!-- bouton achat  -->
 <div class="placementbout">
-    <input type="hidden" value="1" name="quantite">
-    
+<input type="hidden" value="1" name="quantite">
     <button type="submit" class="boutonajoutpanier">
-        <i class='fa-solid fa-bag-shopping'></i> Retour
+        <a href="index.php" ><i class='fa-solid fa-bag-shopping'></i> Retour </a>
     </button>
                     </form>
 </div>

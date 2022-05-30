@@ -4,64 +4,64 @@
 
         <div class="error"></div>
 
-        <form method="post" action="assets/includes/db/traitementins.php" id="formajax">
+        <form method="post" action="assets/include/traitement/traitementoc.php" id="formajax">
             <div class="model_un">
                 <div class="nom">
                     <label for="">Nom :</label>
-                    <input type="text" name="nom" required>
+                    <input type="text" name="nomfo" required>
                 </div>
 
                 <div class="prenom">
                     <label for="">Prénom :</label>
-                    <input type="text" name="prenom" required>
+                    <input type="text" name="prenomfo" required>
                 </div>
             </div>
             <div class="model_deux">
                 <label for="">Date de naissance :</label>
-                <input type="date" name="daten" required>
+                <input type="date" name="datefo" required>
             </div>
 
             <div class="model_deux">
                 <label for="">Adresse mail :</label>
-                <input type="text" name="mail" required>
+                <input type="text" name="mailfo" required>
             </div>
             
             
             <div class="model_deux">
                 <label for="">Pays :</label>
-                <input type="text" name="pays" required>
+                <input type="text" name="paysfo" required>
             </div>
             
             <div class="model_deux">
                 <label for="">Adresse :</label>
-                <input type="text" name="rue" required>
+                <input type="text" name="adressefo" required>
             </div>
             
             <div class="model_un">
                 <div class="nom">
                     <label for="">Code postal :</label>
-                    <input type="text" name="cp" required>
+                    <input type="text" name="cpfo" required>
                 </div>
                 
                 <div class="prenom">
                     <label for="">Ville :</label>
-                    <input type="text" name="ville" required>
+                    <input type="text" name="villefo" required>
                 </div>
             </div>
             <div class="model_un">
                 <div class="nom">
                     <label for="">Code barre photo :</label>
-                      <input type="file" name="cbp" required>
+                      <input type="file" name="cbpfo" required>
                 </div>
                 <div class="prenom">
                     <label for="">Code barre :</label>
-                    <input type="text" name="barretxt" required>
+                    <input type="text" name="barretxtfo" required>
                 </div>  
             </div>
                 
             <div class="model_deux">
                 <label for="">Carte d'identité :</label>
-                <input type="file" name="ci" required>
+                <input type="file" name="cifo" required>
             </div>
           
             <div class="model_deux">

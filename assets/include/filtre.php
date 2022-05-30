@@ -54,10 +54,10 @@
             $requete->execute();
 
         ?>
+
         <h1 style="text-align:center;">
-                    <?php  echo  $affichearticle; ?>
-                </h1>
-     
+            <?php  echo  $affichearticle; ?>
+        </h1>
         <?php
         
         
@@ -80,7 +80,7 @@
                             <h6>Genre</h6>
                             <hr>
                             <?php
-                                    $con = mysqli_connect("db5006773312.hosting-data.io","dbu2407296","5Rc3y4Zg","dbs5603904");
+                                    $con = mysqli_connect("localhost","root","","lapieceunique");
 
                                     $brand_query = "SELECT * FROM genres";
                                     $brand_query_run  = mysqli_query($con, $brand_query);
@@ -112,11 +112,12 @@
                         </div>
                     </div>
                     <!-- TEST -->
+                   
                     <div class="card-body">
                             <h6>sous catégories</h6>
-                            <hr>
+                            <hr><ul style="overflow-x: auto; max-height: 190px;">
                             <?php
-                                    $con = mysqli_connect("db5006773312.hosting-data.io","dbu2407296","5Rc3y4Zg","dbs5603904");
+                                    $con = mysqli_connect("localhost","root","","lapieceunique");
 
                                     $brand_query = "SELECT * FROM sous_categories";
                                     $brand_query_run  = mysqli_query($con, $brand_query);
@@ -137,6 +138,7 @@
                                 <?= $brandlist['nom_sous_categories']; ?>
 
                             </div>
+                           
                             <?php
                                         }
                                     }
@@ -145,8 +147,9 @@
                                         echo "No Brands Found";
                                     }
                                 ?>
-                        </div>
+                        </ul></div> 
                     </div>
+                    
                     <!-- RANGE PRIX -->
                     <div class="card-body">            
 

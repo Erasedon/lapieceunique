@@ -7,7 +7,7 @@
         </a>
         <div id="nav-links">
             <ul>
-                <li><a href="index.php?genres=2">Accueil</a></li>
+                <li><a href="index.php">Accueil</a></li>
                 <li><a href="ajoutposter.php">Ajout poster</a></li>
                 <li><a href="occasion">Occasion</a></li>
                 <li><a href="scanner.php">Scanner</a></li>

@@ -1,0 +1,5 @@
+{
+    "require": {
+        "aspose/barcode-cloud-php": "^22.3"
+    }
+}
