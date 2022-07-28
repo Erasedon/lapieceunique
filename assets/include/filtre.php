@@ -123,10 +123,23 @@
             <div class="col-md-9">
             <br />
             <div class="row filter_data">
-
+                
             </div>
+                <div class="clearfix">
+            <div class="hint-text">Voir les <b>5</b> out of <b>25</b> entries</div>
+            <ul class="pagination">
+                <li class="page-item disabled"><a href="#">Precedent</a></li>
+                <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                <li class="page-item"><a href="#" class="page-link">2</a></li>
+                <li class="page-item "><a href="#" class="page-link">3</a></li>
+                <li class="page-item"><a href="#" class="page-link">4</a></li>
+                <li class="page-item"><a href="#" class="page-link">5</a></li>
+                <li class="page-item"><a href="#" class="page-link">Suivant</a></li>
+            </ul>
+        </div>
             </div>
 
+          
             <!-- FIN filtre -->
 
 

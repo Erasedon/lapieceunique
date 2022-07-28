@@ -8,7 +8,7 @@ include('../db/connectdb.php');
 if(isset($_POST["action"]))
 {
 	$query = "
-	SELECT * FROM articles a, genres g, categories c, sous_categories sc WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories
+	SELECT * FROM articles a, genres g, categories c, sous_categories sc WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories 
 	";
 	if(isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"]))
 	{
@@ -37,6 +37,12 @@ if(isset($_POST["action"]))
 		 AND a.id_categories IN('".$storage_filter."')
 		";
 	}
+    // if(isset($_POST["limit"]))
+	// {
+	// 	$limit_filter = implode("','", $_POST["limit"]);
+        
+	// }
+    $query .= "LIMIT 5 ";
 
 	$statement =$db->prepare($query);
 	$statement->execute();
@@ -60,6 +66,7 @@ if(isset($_POST["action"]))
 				</div>
 
 			</div>
+     
 			';
 		}
 	}
@@ -69,15 +76,3 @@ if(isset($_POST["action"]))
 	}
 	echo $output;
 }?>
-<div class="clearfix">
-    <div class="hint-text">Voir les <b>5</b> out of <b>25</b> entries</div>
-    <ul class="pagination">
-        <li class="page-item disabled"><a href="#">Precedent</a></li>
-        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-        <li class="page-item"><a href="#" class="page-link">2</a></li>
-        <li class="page-item "><a href="#" class="page-link">3</a></li>
-        <li class="page-item"><a href="#" class="page-link">4</a></li>
-        <li class="page-item"><a href="#" class="page-link">5</a></li>
-        <li class="page-item"><a href="#" class="page-link">Suivant</a></li>
-    </ul>
-</div>
