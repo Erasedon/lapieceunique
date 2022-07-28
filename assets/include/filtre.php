@@ -3,179 +3,203 @@
     include 'assets/db/connectdb.php'; 
     
     ?>
-
-<div class="container cat">
-    
-            <?php
-
-            // ici la requete si on a que le genre
-            $sel = "SELECT * FROM articles a, genres g, categories c, sous_categories sc";
-
-            $affichearticle = "";
-
-            // ici la requete si on a que le genre
-            if ((isset($_GET['genres'])))
-            {
-                $sel .= " WHERE a.id_genres = g.id_genres";
-                $sel .= " AND a.id_categories = c.id_categories";
-                $sel .= " AND a.id_sous_categories = sc.id_sous_categories";
-                $sel .= " AND a.id_genres = '".$_GET['genres']."'";
-
-                $requete2 = $db ->prepare($sel);
-                $requete2 ->execute();
-                $affiche2 = $requete2->fetch();
-
-                $affichearticle .= $affiche2['nom_genres'];
-            }
-
-            if ((isset($_GET['categories'])))
-            {
-                $sel .= " AND a.id_categories = '".$_GET['categories']."'";
-
-                $requete3 = $db ->prepare($sel);
-                $requete3 ->execute();
-                $affiche3 = $requete3->fetch();
-
-                $affichearticle .= " / ".$affiche3['nom_categories'];
-            }
-
-            if ((isset($_GET['sous_cat'])))
-            {
-                $sel .= " AND a.id_sous_categories = '".$_GET['sous_cat']."'";
-
-                $requete4 = $db ->prepare($sel);
-                $requete4 ->execute();
-                $affiche4 = $requete4->fetch();
-
-                $affichearticle .= " / ".$affiche4['nom_sous_categories'];
-            }
-
-            $requete = $db->prepare($sel);
-            $requete->execute();
-
-        ?>
-
-        <h1 style="text-align:center;">
-            <?php  echo  $affichearticle; ?>
-        </h1>
-        <?php
-        
-        
-        
-        ?>
+              
+<div class=" container cat">
+      
+     
 <div class="container-filtre-tb">
         <div class="categorie-filtre-tb">
             <!-- filtre -->
             <div class="filtre">
 
-
-
-                <form action="" method="GET">
-                    <div class="card shadow mt-3">
+                    <div class="card shadow mt-4">
                         <div class="card-header">
-                            <h5>Filtre
-                                <button type="submit" class="button-filtre">Chercher</button>
-                            </h5>
+                           
                         </div>
                         <div class="card-body">
-                            <h6>Genre</h6>
+                            <h4>Genre</h4>
                             <hr>
-                            <?php
-                                    $con = mysqli_connect("db5006773312.hosting-data.io","dbu2407296","5Rc3y4Zg","dbs5603904");
+                            <div style="height: 180px; overflow-y: auto; overflow-x: hidden;">
+				        	<?php
 
-                                    $brand_query = "SELECT * FROM genres";
-                                    $brand_query_run  = mysqli_query($con, $brand_query);
+                                $query = "SELECT * FROM genres ORDER BY id_genres";
+                                $statement =$db->prepare($query);
+                                   $statement->execute();
+                                $result = $statement->fetchAll();
+                                foreach($result as $row)
+                                {
+                                ?>
+                                <div class="list-group-item checkbox">
+                                    <label><input type="checkbox" class="common_selector brand" value="<?php echo $row['id_genres']; ?>"  > <?php echo $row['nom_genres']; ?></label>
+                                </div>
+                                <?php
+                                }
 
-                                    if(mysqli_num_rows($brand_query_run) > 0)
-                                    {
-                                        foreach($brand_query_run as $brandlist)
-                                        {
-                                            $checked = [];
-                                            if(isset($_GET['genress']))
-                                            {
-                                                $checked = $_GET['genress'];
-                                            }
-                                            ?>
+                                ?>
+                          
                             <div>
-                                <input type="checkbox" name="genress[]" value="<?= $brandlist['id_genres']; ?>"
-                                    <?php if(in_array($brandlist['id_genres'], $checked)){ echo "checked"; } ?> />
-                                <?= $brandlist['nom_genres']; ?>
 
                             </div>
-                            <?php
-                                        }
-                                    }
-                                    else
-                                    {
-                                        echo "No Brands Found";
-                                    }
-                                ?>
+                          
                         </div>
                     </div>
                     <!-- TEST -->
+                   
                     <div class="card-body">
-                            <h6>sous catégories</h6>
+                            <h4> catégories</h4>
                             <hr>
-                            <?php
-                                    $con = mysqli_connect("db5006773312.hosting-data.io","dbu2407296","5Rc3y4Zg","dbs5603904");
-
-                                    $brand_query = "SELECT * FROM sous_categories";
-                                    $brand_query_run  = mysqli_query($con, $brand_query);
-
-                                    if(mysqli_num_rows($brand_query_run) > 0)
-                                    {
-                                        foreach($brand_query_run as $brandlist)
-                                        {
-                                            $checked = [];
-                                            if(isset($_GET['sous_cat2']))
-                                            {
-                                                $checked = $_GET['sous_cat2'];
-                                            }
-                                            ?>
-                            <div>
-                                <input type="checkbox" name="sous_cat2[]" value="<?= $brandlist['id_sous_categories']; ?>"
-                                    <?php if(in_array($brandlist['id_sous_categories'], $checked)){ echo "checked"; } ?> />
-                                <?= $brandlist['nom_sous_categories']; ?>
-
-                            </div>
-                            <?php
-                                        }
-                                    }
-                                    else
-                                    {
-                                        echo "No Brands Found";
-                                    }
+                           
+                            <div style="height: 180px; overflow-y: auto; overflow-x: hidden;">
+                                <?php
+                                $query = "
+                                SELECT * FROM categories ORDER BY id_categories 
+                                ";
+                                $statement =$db->prepare($query);
+                                $statement->execute();
+                                $result = $statement->fetchAll();
+                                foreach($result as $row)
+                                {
                                 ?>
-                        </div>
+                                <div class="list-group-item checkbox">
+                                    <label><input type="checkbox" class="common_selector storage" value="<?php echo $row['id_categories']; ?>"> <?php echo $row['nom_categories']; ?> </label>
+                                </div>
+                                <?php
+                                }
+                                ?>	
+                             
+                            </div>
+                           
+                         
+                        </div> 
                     </div>
+
+                    <div class="card-body">
+                            <h4>sous catégories</h4>
+                    <div style="height: 200px; overflow-y: auto; overflow-x: hidden;">
+                            <?php
+
+                            $query = "
+                            SELECT * FROM sous_categories ORDER BY id_sous_categories
+                            ";
+                            $statement =$db->prepare($query);
+                            $statement->execute();
+                            $result = $statement->fetchAll();
+                            foreach($result as $row)
+                            {
+                            ?>
+                            <div class="list-group-item checkbox">
+                                <label><input type="checkbox" class="common_selector ram" value="<?php echo $row['id_sous_categories']; ?>" > <?php echo $row['nom_sous_categories']; ?></label>
+                            </div>
+                            <?php    
+                            }
+
+                            ?> 
+                         </div>
+                        
+                           </div> 
+                       </div>
+   
+                                
+   
+
+                   
                     <!-- RANGE PRIX -->
                     <div class="card-body">            
 
-                    <?php 
-
-                    // echo "get prix : ";
-                    // echo $_GET['prix3'];
-                            if (empty($_GET['prix3'])){$valeur = "150";}
-                            if (!empty($_GET['prix3'])) {
-                                                               
-                                $valeur = $_GET['prix3'];
-                            
-                            }
-                    ?> 
-                    
+                  
                         <div class="slidecontainer">
-                        <p>Choisis ton prix max</p>
-                            <input type="range" name="prix3" min="1" max="150" value="<?php echo $valeur; ?>" class="slider" id="myRange" style="background-color:#000; height:4px; width:200px">
-                            <p>Prix: <span id="demo"></span>€ max</p>
-                        </div>
+
+                          <h4>Prix</h4>
+                        <input type="hidden" id="hidden_minimum_price" value="5" />
+                        <input type="hidden" id="hidden_maximum_price" value="500" />
+                        <p id="price_show">5 - 500</p>
+                        <div id="price_range"></div>  
+                     </div>
+                       
                     </div>
-
-
-                </form>
-                
-                
-                
+            
 
             </div>
+            <div class="col-md-9">
+            <br />
+            <div class="row filter_data">
+                
+            </div>
+                <div class="clearfix">
+            <div class="hint-text">Voir les <b>5</b> out of <b>25</b> entries</div>
+            <ul class="pagination">
+                <li class="page-item disabled"><a href="#">Precedent</a></li>
+                <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                <li class="page-item"><a href="#" class="page-link">2</a></li>
+                <li class="page-item "><a href="#" class="page-link">3</a></li>
+                <li class="page-item"><a href="#" class="page-link">4</a></li>
+                <li class="page-item"><a href="#" class="page-link">5</a></li>
+                <li class="page-item"><a href="#" class="page-link">Suivant</a></li>
+            </ul>
+        </div>
+            </div>
 
+          
             <!-- FIN filtre -->
+
+
+
+
+
+
+<script>
+$(document).ready(function(){
+
+filter_data();
+
+function filter_data()
+{
+$('.filter_data').html('<div id="loading" style="" ></div>');
+var action = 'fetch_data';
+var minimum_price = $('#hidden_minimum_price').val();
+var maximum_price = $('#hidden_maximum_price').val();
+var brand = get_filter('brand');
+var ram = get_filter('ram');
+var storage = get_filter('storage');
+$.ajax({
+url:"assets/include/cards.php",
+method:"POST",
+data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price, brand:brand, ram:ram, storage:storage},
+success:function(data){
+$('.filter_data').html(data);
+}
+});
+}
+
+function get_filter(class_name)
+{
+var filter = [];
+$('.'+class_name+':checked').each(function(){
+filter.push($(this).val());
+});
+return filter;
+}
+
+$('.common_selector').click(function(){
+filter_data();
+});
+
+$('#price_range').slider({
+range:true,
+min:5,
+max:500,
+values:[5, 500],
+step:1,
+stop:function(event, ui)
+{
+$('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
+$('#hidden_minimum_price').val(ui.values[0]);
+$('#hidden_maximum_price').val(ui.values[1]);
+filter_data();
+}
+});
+
+});
+</script>
+
+<!-- FIN filtre --> 
