@@ -9,7 +9,7 @@
             <ul>
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="ajoutposter.php">Ajout poster</a></li>
-                <li><a href="occasion">Occasion</a></li>
+                <li><a href="occasion.php">Occasion</a></li>
                 <li><a href="scanner.php">Scanner</a></li>
             </ul>
         </div>

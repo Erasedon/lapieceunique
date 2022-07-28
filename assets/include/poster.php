@@ -1,6 +1,7 @@
 
     <div class="container art">
 <?php
+$id_articles = $_GET["id_article"];
 
 if ((empty($_GET['id_article'])))
 {
@@ -13,6 +14,12 @@ WHERE id_articles = " . $_GET["id_article"] . "";
 $requetee = $db->prepare($sqll);
 $requetee->execute();
 $affichee = $requetee->fetch();
+
+$sqls = "SELECT * FROM stocks
+WHERE id_articles = " . $_GET["id_article"] . "";
+$requetes = $db->prepare($sqls);
+$requetes->execute();
+$affiches = $requetes->fetch();
 
 if ($affichee['nombre'] == 0)
 {
@@ -134,18 +141,6 @@ $id_login = $_SESSION['id'];
         <div class="titre2" id="afficher">
         <div class="titre2"><?php echo $affichearticle['prix_articles']; ?> €</div>
 
-<?php
-                        $sqldetail3 = "SELECT c.couleur_couleurs AS couleurs, c.id_couleurs AS id, COUNT(*) AS nombres FROM articles a, stocks s, tailles t, couleurs c 
-                        WHERE a.id_articles=s.id_articles 
-                        AND s.id_tailles=t.id_tailles 
-                        AND s.id_couleurs=c.id_couleurs 
-                        AND s.id_articles = " . $_GET["id_article"] . " 
-                        GROUP BY c.couleur_couleurs";
-                        $requetedetail3= $db->prepare($sqldetail3);
-                        $requetedetail3->execute();
-                        
-                        ?>
-
 </div>
 </div>
 <div class="detail1">
@@ -154,11 +149,11 @@ $id_login = $_SESSION['id'];
 </div>
 <div class="detail1">
     <div class="titre2">Quantite : </div>
-    <div class="titre2 afficher">
-    <div class="titre4"></div>
-    <div class="titre2"><?php echo $affichearticle['couleur']; ?></div>
+    <div class="titre2 afficher"></div>
+    <div class="titre2"><?php echo $affiches['quantite_stock']; ?></div>
 
-</div>
+
+
 </div>
 
 <div class="detail2">
@@ -171,11 +166,17 @@ $id_login = $_SESSION['id'];
 
 <!-- bouton achat  -->
 <div class="placementbout">
-<input type="hidden" value="1" name="quantite">
+<input type="hidden"  name="retour">
     <button type="submit" class="boutonajoutpanier">
-        <a href="index.php" ><i class='fa-solid fa-bag-shopping'></i> Retour </a>
+        <a style="text-decoration: none" href="index.php" ><i class='fa-solid fa-bag-shopping'></i> Retour </a>
     </button>
                     </form>
+
+<input type="hidden"  name="modifier">
+    <button type="submit" class="boutonajoutpanier">
+        <a style="text-decoration: none" href="ajoutposter.php?id_article=<?php echo $id_articles;?>" ><i class='fa-solid fa-bag-shopping'></i> Modifier </a>
+    </button>
+                  
 </div>
 <!-- 
 <div class="inforetour">

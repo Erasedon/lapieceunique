@@ -1,242 +1,83 @@
-<div class="categorie-tb">
-
-<?php     
-        $con->set_charset("utf8");
-
-                if ((isset($_GET['genress'])) && (empty($_GET['sous_cat2'])))
-                {
-                    $branchecked = [];
-                    $branchecked = $_GET['genress'];
-                    foreach($branchecked as $rowbrand)
-                    {
-                        $products = "SELECT * FROM articles WHERE id_genres IN ($rowbrand) AND prix_articles <= ".$_GET['prix3']."";
-                        $products_run = mysqli_query($con, $products);
-                   
-                        if(mysqli_num_rows($products_run) > 0)
-                        {
-                            foreach($products_run as $proditems) :
-                                ?>
-<div class="test-tb">
-    <div class="border">
-        <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
-            <ul>
-                <li><img src="<?= $proditems['image1_articles']; ?>"></li>
-                <li>
-                    <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
-                </li>
-                                
-            </ul>
-        </a>
-    </div>
-</div>
-<?php
-                            endforeach;
-                        }
-                    
-                }
-                }else{
-                
-                   
-                        $products = "SELECT * FROM articles WHERE id_genres";
-                        $products_run = mysqli_query($con, $products);
-                        if(mysqli_num_rows($products_run) > 0)
-                        {
-                            foreach($products_run as $proditems) :
-                                ?>
-<div class="test-tb">
-    <div class="border">
-        <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
-            <ul>
-                <li><img src="<?= $proditems['image1_articles']; ?>"></li>
-                <li>
-                    <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
-                </li>
-                                
-            </ul>
-        </a>
-    </div>
-</div>
-<?php
-                            endforeach;
-                        }
-                    
-                }
-                
-
-
-                if ((empty($_GET['genress'])) && (isset($_GET['sous_cat2'])))
-                {
-                    $branchecked = [];
-                    
-                    $branchecked2 = $_GET['sous_cat2'];
-                    // foreach($branchecked as $rowbrand)
-                    // {
-                        foreach($branchecked2 as $rowbrand2)
-                    {
-
-                        $products = "SELECT * FROM articles WHERE id_sous_categories IN ($rowbrand2) AND prix_articles <= ".$_GET['prix3']."";
-                        $products_run = mysqli_query($con, $products);
-                        if(mysqli_num_rows($products_run) > 0)
-                        {
-                            foreach($products_run as $proditems) :
-                                ?>
-<div class="test-tb">
-    <div class="border">
-        <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
-            <ul>
-                <li><img src="<?= $proditems['image1_articles']; ?>"></li>
-                <li>
-                    <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
-                </li>
-            </ul>
-        </a>
-    </div>
-</div>
-<?php
-                            endforeach;
-                        }
-                        
-                    
-                }
-                }
-
-
-
-                if ((isset($_GET['genress'])) && (isset($_GET['sous_cat2'])))
-                {
-                    $branchecked = [];
-                    $branchecked = $_GET['genress'];
-                    $branchecked2 = $_GET['sous_cat2'];
-                    // $branchecked3 = $_GET['prix3'];
-                    foreach($branchecked as $rowbrand)
-                    {
-                        foreach($branchecked2 as $rowbrand2)
-                    {
-              
-
-                        $products = "SELECT * FROM articles WHERE id_genres IN ($rowbrand) AND id_sous_categories IN ($rowbrand2) AND prix_articles <= ".$_GET['prix3']."";
-                        $products_run = mysqli_query($con, $products);
-                        if(mysqli_num_rows($products_run) > 0)
-                        {
-                            foreach($products_run as $proditems) :
-                                ?>
-<div class="test-tb">
-    <div class="border">
-        <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
-            <ul>
-                <li><img src="<?= $proditems['image1_articles']; ?>"></li>
-                <li>
-                    <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
-                </li>
-               
-            </ul>
-        </a>
-    </div>
-</div>
-<?php
-                            endforeach;
-                        }
-                    
-                }
-                }
-                }
-                
-                if ((!empty($_GET['genress'])) && (!empty($_GET['sous_cat2'])) && (!empty($_GET['genres'])))
-                {
-
-                    // $branchecked3 = $_GET['prix3'];
-
-                    $products4 = "SELECT * FROM articles WHERE prix_articles";
-                    $products_run4 = mysqli_query($con, $products4);
-                    if(mysqli_num_rows($products_run4) > 0)
-                    {
-                        foreach($products_run4 as $proditems) :
-                            ?>
-                        <div class="test-tb">
-                        <div class="border">
-                            <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
-                                <ul>
-                                    <li><img src="<?= $proditems['image1_articles']; ?>"></li>
-                                    <li>
-                                        <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
-                                    </li>
-                                
-                                </ul>
-                            </a>
-                        </div>
-                        </div>
-                    <?php
-                        endforeach;
-
-                      
-                        }
-              
-                }else{
-                    $products = "SELECT * FROM articles WHERE prix_articles <= ".$_GET['prix3']."";
-                    $products_run = mysqli_query($con, $products);
-                    if(mysqli_num_rows($products_run) > 0)
-                    {
-                        foreach($products_run as $proditems) :
-                                                    ?>
-                    <div class="test-tb">
-                        <div class="border">
-                            <a href="poster.php?id_article=<?= $proditems['id_articles'];?>">
-                                <ul>
-                                    <li><img src="<?= $proditems['image1_articles']; ?>"></li>
-                                    <li>
-                                        <h6><?= $proditems['nom_articles']; ?> <?= $proditems['prix_articles']; ?>€</h6>
-                                    </li>
-                                
-                                </ul>
-                            </a>
-                        </div>
-                    </div>
-                    <?php
-                        endforeach;
-                        }
-              
-                }
-                   
-                
-            ?>
-            
-
-
-<!-- CATEGORIE SANS FILTRE -->
 <?php
 
-    
-if (isset($_GET['genres'])){
+//fetch_data.php
 
-foreach ($requete as $row)
+
+include('../db/connectdb.php');
+
+if(isset($_POST["action"]))
 {
-    
-    
-?>
+	$query = "
+	SELECT * FROM articles a, genres g, categories c, sous_categories sc WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories
+	";
+	if(isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"]))
+	{
+		$query .= "
+		 AND a.prix_articles BETWEEN '".$_POST["minimum_price"]."' AND '".$_POST["maximum_price"]."'
+		";
+	}
+	if(isset($_POST["brand"]))
+	{
+		$brand_filter = implode("','", $_POST["brand"]);
+		$query .= "
+		 AND a.id_genres IN('".$brand_filter."')
+		";
+	}
+	if(isset($_POST["ram"]))
+	{
+		$ram_filter = implode("','", $_POST["ram"]);
+		$query .= "
+		 AND a.id_sous_categories IN('".$ram_filter."')
+		";
+	}
+	if(isset($_POST["storage"]))
+	{
+		$storage_filter = implode("','", $_POST["storage"]);
+		$query .= "
+		 AND a.id_categories IN('".$storage_filter."')
+		";
+	}
 
-<div class="categorie-1">
+	$statement =$db->prepare($query);
+	$statement->execute();
+	$result = $statement->fetchAll();
+	$total_row = $statement->rowCount();
+	$output = '';
+	if($total_row > 0)
+	{
+		foreach($result as $row)
+		{
+			$output .= '
+			<div class="col-sm-2 col-lg-3 col-md-3">
+				<div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
+					<img src="'. $row['image1_articles'] .'" alt="" class="img-responsive" >
+					<p align="center"><strong><a href="poster.php?id_article= '.$row['id_articles'].'">'. $row['nom_articles'] .'</a></strong></p>
+					<h4 style="text-align:center;" class="text-danger" >'. $row['prix_articles'] .'€</h4>
+					<p>
+					Genres : '. $row['nom_genres'] .' <br />
+					Categories : '. $row['nom_categories'] .' <br />
+					listes personnages : '. $row['nom_sous_categories'] .' </p>
+				</div>
 
-    <ul>
-        <a href="poster.php?id_article=<?php echo $row['id_articles'];?>">
-            <li><img src="<?php echo $row['image1_articles'];?>" alt=""></li>
-            <li>
-                <?php
-            echo $row['nom_articles'];
-            ?>
-            </li>
-            <!-- <li>COULEUR</li> -->
-            <li>
-                <?php
-            echo $row['prix_articles'];
-            ?>€</li>
-        </a>
+			</div>
+			';
+		}
+	}
+	else
+	{
+		$output = '<h3>No Data Found</h3>';
+	}
+	echo $output;
+}?>
+<div class="clearfix">
+    <div class="hint-text">Voir les <b>5</b> out of <b>25</b> entries</div>
+    <ul class="pagination">
+        <li class="page-item disabled"><a href="#">Precedent</a></li>
+        <li class="page-item active"><a href="#" class="page-link">1</a></li>
+        <li class="page-item"><a href="#" class="page-link">2</a></li>
+        <li class="page-item "><a href="#" class="page-link">3</a></li>
+        <li class="page-item"><a href="#" class="page-link">4</a></li>
+        <li class="page-item"><a href="#" class="page-link">5</a></li>
+        <li class="page-item"><a href="#" class="page-link">Suivant</a></li>
     </ul>
-</div>
-<?php
-}
-}
-// else {echo "Aucun article trouvé";}
-?>
-</div>
-</div>
 </div>

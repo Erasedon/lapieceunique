@@ -41,17 +41,17 @@ include 'assets/include/traitement/traitementscanner.php';
 
         <div class="error"></div>
 
-        <form method="post" action="assets/includes/db/traitementins.php" id="formajax">
+        <form method="post" action="assets/include/traitement/traitementscanner.php" id="formajax">
             <div class="model_un">
 				<div class="nom">
 					<label for="">Code barre :</label>
                     <input type="text" name="cb" required>
                 </div>
 
-            <div class="model_deux">
+            <!-- <div class="model_deux">
                 <label for=""></label>
                 <input type="file" name="ci" required>
-            </div>
+            </div> -->
 			</div>
           
             <div class="model_deux">

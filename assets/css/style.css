@@ -400,6 +400,36 @@ font-size: 13Px;
     margin-bottom: 100px;
 }
 
+ @media screen and (max-width: 1000px) {
+    .inscription, .connexion {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .inscription, .connexion {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .inscription, .connexion {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .inscription, .connexion {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .inscription, .connexion {
+        width: 95%;
+    }
+}
+
 .sucess {
     color: lime;
 }
@@ -574,6 +604,7 @@ form {
     border-radius: 3px;
     font-family: 'Oswald';
     align-self: center;
+  
 }
 
 .co_ins {
@@ -583,4 +614,94 @@ form {
     align-items: center;
     width: 90%;
     margin: 10px;
+}
+
+/* pagination*/
+
+.pagination {
+    float: right;
+    margin: 0 0 5px;
+}
+.pagination li a {
+    border: none;
+    font-size: 13px;
+    min-width: 30px;
+    min-height: 30px;
+    color: #999;
+    margin: 0 2px;
+    line-height: 30px;
+    border-radius: 2px !important;
+    text-align: center;
+    padding: 0 6px;
+}
+.pagination li a:hover {
+    color: #666;
+}	
+.pagination li.active a, .pagination li.active a.page-link {
+    background: #161414;
+}
+.pagination li.active a:hover {        
+    background: #0397d6;
+}
+.pagination li.disabled i {
+    color: #ccc;
+}
+.pagination li i {
+    font-size: 16px;
+    padding-top: 6px
+}
+.hint-text {
+    float: left;
+    margin-top: 10px;
+    font-size: 13px;
+} 
+
+/* filtre test  */
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: 160px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+#loading
+{
+
+	text-align:center; 
+	background: url('../img/loader.gif') no-repeat center; 
+	height: 250px;
 }
