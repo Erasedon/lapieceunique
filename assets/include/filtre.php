@@ -114,19 +114,12 @@ include 'assets/db/connectdb.php';
                 </div>
 
             </div>
-
-
+         
         </div>
         <div class="col-md-9">
             <br />
             <div class="row filter_data">
 
-            </div>
-            <div class="clearfix">
-                <div class="hint-text">Voir les <b>5</b> out of <b>25</b> entries</div>
-                <div class="data_pag">
-
-                </div>
             </div>
         </div>
 
@@ -145,15 +138,19 @@ include 'assets/db/connectdb.php';
 
                 filter_data();
 
-                function filter_data() {
+
+                function filter_data(page = null,limits = null) {
                     $('.filter_data').html('<div id="loading" style="" ></div>');
                     var action = 'fetch_data';
+                    var limit = get_filter('limit');
                     var minimum_price = $('#hidden_minimum_price').val();
                     var maximum_price = $('#hidden_maximum_price').val();
                     var brand = get_filter('brand');
                     var ram = get_filter('ram');
                     var storage = get_filter('storage');
-                    var page = $("#testpage").hasClass("page");
+
+                    console.log('page : ' + page);
+                    console.log('limit : ' + limits);
                     
                     var  object = {
                         // action: action,
@@ -166,13 +163,14 @@ include 'assets/db/connectdb.php';
                     }
 
                     if (action=!null) {object.action=action}
+                    if (limits=!null) {object.limits=limits}
                     if (minimum_price!="") {object.minimum_price = minimum_price;}
                     if (maximum_price!="") {object.maximum_price = maximum_price;}
                     if (brand!="") {object.brand = brand;}
                     if (ram!="") {object.ram = ram;}
                     if (storage!="") {object.storage = storage;}
                     if (page!=null) {object.page = page;}
-
+                   
               
 
                     $.ajax({
@@ -194,10 +192,20 @@ include 'assets/db/connectdb.php';
 
                     return filter.toString();
                 }
-
+                
                 $('.common_selector').click(function() {
                     filter_data();
                 });
+
+                $('.filter_data').on(
+                    'click',
+                    '.pag_selector',
+                    '.limit_selector',
+                        function(e,limit) {
+
+                            filter_data($(e.target).data('page'),$(limit.target).data('limits'));
+                    });
+
 
                 $('#price_range').slider({
                     range: true,

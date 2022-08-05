@@ -2,8 +2,7 @@
 
 //fetch_data.php
 
-
-include('../db/connectdb.php');
+include('../db/connectdb.php');	
 
 if(isset($_GET["action"]))
 {
@@ -60,14 +59,34 @@ if(isset($_GET["action"]))
 		// var_dump($query);
 	}
 
-	
+	$limit =5;
 	$statement =$db->prepare($query);
 	$statement->execute();
 	$result = $statement->fetchAll();
-	$total_row = $statement->rowCount();
-		
+	$total_pag = $statement->rowCount();
+	$nombre_page = ceil($total_pag/$limit);
+	
+	
+	if(isset($_GET["page"]))
+	{	
+	
+			$valref = ($limit*$_GET['page'])-$limit; 
+			$query .= "LIMIT ".$valref.",".$limit."";
+			$statement =$db->prepare($query);
+			$statement->execute();
+			$result = $statement->fetchAll();
+			$total_row = $statement->rowCount();
+			
+			
+		}else{
+			$query .= "LIMIT 0,".$limit."";
+			$statement =$db->prepare($query);
+			$statement->execute();
+			$result = $statement->fetchAll();
+			$total_row = $statement->rowCount();
+	}
 	$output = '';
-	if($total_row > 0)
+	if($total_pag > 0)
 	{
 		foreach($result as $row)
 		{
@@ -81,7 +100,7 @@ if(isset($_GET["action"]))
 					Genres : '. $row['nom_genres'] .' <br />
 					Categories : '. $row['nom_categories'] .' <br />
 					listes personnages : '. $row['nom_sous_categories'] .'
-				
+				 
 					</p>
 			
 				</div>
@@ -90,6 +109,29 @@ if(isset($_GET["action"]))
      
 			';
 		}
+		$output .= '<div class="col-sm-2 col-lg-8 col-md-3">
+		<ul class="pagination">
+		<li class="page-item "><button class="pag_selector page" data-page="Precedent">Precedent</button></li>';
+
+			for($i=1;$nombre_page >= $i ;$i++)
+			{
+					$output .= '
+						<li class="page-item "><button class="pag_selector page" data-page="'. $i .'">'.$i.'</button></li>
+					';
+			}
+		$output.='
+				<li class="page-item "><button class="pag_selector page" data-page="Suivant">Suivant</button></li>
+			</ul>
+		</div>';
+		$output.='<div class="col-sm-2 col-lg-8 col-md-3 limiter"> 
+		<div class="hint-text">le limitateur est à <b>'.$limit.'</b> sur <b>'.$total_pag.'</b> resultat </div>
+		<br>
+		<br>
+		<button class ="limit_selector lim" data-limits="5">5</button>    
+		<button class ="limit_selector lim" data-limits="10">10</button>    
+		<button class ="limit_selector lim" data-limits="20">20</button>    
+		</div>
+';
 		
 	}
 	else
@@ -99,8 +141,6 @@ if(isset($_GET["action"]))
 	echo $output;
 }
 
-// var_dump($_GET);
-// die();
 
 /*
 if(isset($_POST["action"]))
@@ -138,7 +178,7 @@ if(isset($_POST["action"]))
      if(isset($_POST["page"]))
 	 {
 		// $limiter = '5';
-	 	// $limit_filter = implode("','", $_GET["page"]);
+	 	
 	 	// $query .= "LIMIT '".$limt_filter."','".$limiter."'";
 	}
 	
