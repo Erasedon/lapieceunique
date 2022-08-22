@@ -24,7 +24,7 @@ include 'assets/db/connectdb.php';
 
                             $query = "SELECT * FROM genres ORDER BY id_genres";
                             $statement = $db->prepare($query);
-                            $statement->execute();
+                            $statement->execute();  
                             $result = $statement->fetchAll();
                             foreach ($result as $row) {
                             ?>
@@ -96,32 +96,32 @@ include 'assets/db/connectdb.php';
                 </div>
             </div>
 
-
-
-
-
+            
+            
+            
+            
             <!-- RANGE PRIX -->
             <div class="card-body">
-
-
+                
+                
                 <div class="slidecontainer">
-
+                    
                     <h4>Prix</h4>
                     <input type="hidden" id="hidden_minimum_price" value="5" />
                     <input type="hidden" id="hidden_maximum_price" value="500" />
                     <p id="price_show">5 - 500</p>
                     <div id="price_range"></div>
                 </div>
-
+                
             </div>
-         
+            
         </div>
         <div class="col-md-9">
             <br />
             <div class="row filter_data">
-
-            </div>
-        </div>
+                
+           
+                </div>
 
 
 
@@ -130,29 +130,42 @@ include 'assets/db/connectdb.php';
 
 
 
-
-
-
         <script>
-            $(document).ready(function() {
-
-                filter_data();
 
 
-                function filter_data(page = null,limits = null) {
-                    $('.filter_data').html('<div id="loading" style="" ></div>');
-                    var action = 'fetch_data';
-                    var limit = get_filter('limit');
-                    var minimum_price = $('#hidden_minimum_price').val();
-                    var maximum_price = $('#hidden_maximum_price').val();
-                    var brand = get_filter('brand');
-                    var ram = get_filter('ram');
-                    var storage = get_filter('storage');
+// Fonction qui va récupér les paramètres GET
 
-                    console.log('page : ' + page);
-                    console.log('limit : ' + limits);
-                    
-                    var  object = {
+$(document).ready(function() {
+    var currentURL = document.URL;
+    function getParameterByName(name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, '\\$&'); // regex qui traite la chaine
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    
+    // console.log('url: '+currentURL);
+    
+    var page = (getParameterByName('page') == null) ? 1 : getParameterByName('page');
+    var limit = (getParameterByName('limit') == null) ? 5 : getParameterByName('limit');
+    
+    filter_data(page, limit);
+    
+    function filter_data(page = 1, limit = 5) {
+                     
+        $('.filter_data').html('<div id="loading" style="" ></div>');
+        var action = 'fetch_data';
+        var minimum_price = $('#hidden_minimum_price').val();
+        var maximum_price = $('#hidden_maximum_price').val();
+        var brand = get_filter('brand');
+        
+        var ram = get_filter('ram');
+        var storage = get_filter('storage');
+        
+        
+        var  object = {
                         // action: action,
                         //     minimum_price: minimum_price,
                         //     maximum_price: maximum_price,
@@ -161,18 +174,41 @@ include 'assets/db/connectdb.php';
                         //     storage: storage,
                         //     page: page
                     }
-
-                    if (action=!null) {object.action=action}
-                    if (limits=!null) {object.limits=limits}
-                    if (minimum_price!="") {object.minimum_price = minimum_price;}
-                    if (maximum_price!="") {object.maximum_price = maximum_price;}
-                    if (brand!="") {object.brand = brand;}
-                    if (ram!="") {object.ram = ram;}
-                    if (storage!="") {object.storage = storage;}
-                    if (page!=null) {object.page = page;}
-                   
-              
-
+                    
+                    if (action=!null) {
+                        object.action=action;
+                    }
+                        if (limit!=null) {
+                            object.limit=limit;
+                            urlreplace = "limit="+limit+"&";
+                            console.log(urlreplace);
+                        }
+                            if (page!=null) {
+                                object.page = page;
+                                urlreplace += "page="+page+"&";
+                            }
+                                if (minimum_price!="") {
+                                    object.minimum_price = minimum_price;
+                                    urlreplace += "minimum_price="+minimum_price+"&";
+                                }
+                                    if (maximum_price!="") {
+                                        object.maximum_price = maximum_price;
+                                        urlreplace += "maximun_price="+maximum_price+"&";
+                                    }
+                                        if (brand!="") {
+                                            object.brand = brand;
+                                            urlreplace += "brand="+brand+"&";
+                                        }
+                                            if (ram!="") {
+                                                object.ram = ram;
+                                                urlreplace += "ram="+ram+"&";
+                                            }
+                                                if (storage!="") {
+                                                    object.storage = storage;
+                                                    urlreplace += "storage="+storage;
+                                                }
+                 
+                    
                     $.ajax({
                         url: "assets/include/cards.php",
                         method: "GET",
@@ -180,10 +216,12 @@ include 'assets/db/connectdb.php';
                         success: function(data) {
                             $('.filter_data').html(data);
 
+                            // urlresultat = window.location.replace('?'+urlreplace);   
                         }
                     });
-                }
 
+                }
+                
                 function get_filter(class_name) {
                     var filter = [];
                     $('.' + class_name + ':checked').each(function() {
@@ -192,19 +230,27 @@ include 'assets/db/connectdb.php';
 
                     return filter.toString();
                 }
-                
+                        
                 $('.common_selector').click(function() {
                     filter_data();
+                    urlresultat = window.location.replace('?'+urlreplace);
                 });
+                
+             
+            $('.filter_data').on(
+                'click',
+                '.pag_selector',
+                function(e) {
+                    filter_data($(e.target).data('page'),limit);
+                    urlresultat = window.location.replace('?'+urlreplace);
+                });
+                
 
-                $('.filter_data').on(
-                    'click',
-                    '.pag_selector',
-                    '.limit_selector',
-                        function(e,limit) {
 
-                            filter_data($(e.target).data('page'),$(limit.target).data('limits'));
-                    });
+                $('.filter_data').on('click','.limit_selector', function(e) {                    
+                    filter_data(page,$(e.target).data('limit'));
+                    urlresultat = window.location.replace('?'+urlreplace);
+                });
 
 
                 $('#price_range').slider({
@@ -225,3 +271,6 @@ include 'assets/db/connectdb.php';
         </script>
 
         <!-- FIN filtre -->
+
+
+

@@ -1,6 +1,8 @@
 <?php
 
 //fetch_data.php
+var_dump($_GET);
+
 
 include('../db/connectdb.php');	
 
@@ -58,8 +60,9 @@ if(isset($_GET["action"]))
 		";
 		// var_dump($query);
 	}
-
-	$limit =5;
+	
+		$limit =$_GET["limit"];
+	
 	$statement =$db->prepare($query);
 	$statement->execute();
 	$result = $statement->fetchAll();
@@ -78,13 +81,8 @@ if(isset($_GET["action"]))
 			$total_row = $statement->rowCount();
 			
 			
-		}else{
-			$query .= "LIMIT 0,".$limit."";
-			$statement =$db->prepare($query);
-			$statement->execute();
-			$result = $statement->fetchAll();
-			$total_row = $statement->rowCount();
-	}
+		}
+		
 	$output = '';
 	if($total_pag > 0)
 	{
@@ -111,27 +109,27 @@ if(isset($_GET["action"]))
 		}
 		$output .= '<div class="col-sm-2 col-lg-8 col-md-3">
 		<ul class="pagination">
-		<li class="page-item "><button class="pag_selector page" data-page="Precedent">Precedent</button></li>';
+		<li class="page-item "><button class="page pag_selector " data-page="Precedent">Precedent</button></li>';
 
 			for($i=1;$nombre_page >= $i ;$i++)
 			{
 					$output .= '
-						<li class="page-item "><button class="pag_selector page" data-page="'. $i .'">'.$i.'</button></li>
+						<li class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
 					';
 			}
 		$output.='
-				<li class="page-item "><button class="pag_selector page" data-page="Suivant">Suivant</button></li>
+				<li class="page-item "><button class="page pag_selector " data-page="Suivant">Suivant</button></li>
 			</ul>
 		</div>';
 		$output.='<div class="col-sm-2 col-lg-8 col-md-3 limiter"> 
-		<div class="hint-text">le limitateur est à <b>'.$limit.'</b> sur <b>'.$total_pag.'</b> resultat </div>
+		<div class="hint-text">le limitateur est à <b>'.$limit.'</b> sur <b>334</b> resultat </div>
 		<br>
 		<br>
-		<button class ="limit_selector lim" data-limits="5">5</button>    
-		<button class ="limit_selector lim" data-limits="10">10</button>    
-		<button class ="limit_selector lim" data-limits="20">20</button>    
+		<button class ="limit_selector " data-limit="5">5</button>    
+		<button class ="limit_selector " data-limit="10">10</button>    
+		<button class ="limit_selector " data-limit="20">20</button>    
 		</div>
-';
+</div>';
 		
 	}
 	else
