@@ -1,7 +1,10 @@
 <?php
 
-include 'assets/db/connectdb.php'; 
-    $cbpfo = $_post['cbpfo'];
+include '../../db/connectdb.php'; 
+    $cbpfo = $_POST['cb'];
+
+      var_dump($cbpfo);
+      die();
        $sql = "SELECT * FROM articles WHERE cbp_articles = :cbp_articles";
        $prepare = $db->prepare($sql);   
        $prepare ->execute(array(':cbp_articles' => $cbpfo));    

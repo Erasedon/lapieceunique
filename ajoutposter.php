@@ -24,8 +24,8 @@
 </head>
 <body>
     <?php 
-    include 'assets/include/navbar.php'; 
-    include 'assets/include/formulaireap.php'; 
+    include 'assets/includes/navbar.php'; 
+    include 'assets/includes/formulaireap.php'; 
    
     
     ?>

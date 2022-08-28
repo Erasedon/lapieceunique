@@ -7,7 +7,7 @@
 
         <div class="error"></div>
 
-        <form method="post" action="assets/include/traitement/traitementoc.php" id="formajax">
+        <form method="post" action="assets/includes/traitement/traitementoc.php" id="formajax">
             <div class="model_un">
                 <div class="nom">
                     <label for="">Nom :</label>
@@ -92,7 +92,7 @@
 
         <div class="error"></div>
 
-        <form method="post" action="assets/include/traitement/traitementoc.php" id="formajax">
+        <form method="post" action="assets/includes/traitement/traitementoc.php" id="formajax">
             <div class="model_un">
                 <div class="nom">
                     <label for="">Nom :</label>

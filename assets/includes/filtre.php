@@ -199,7 +199,7 @@ include 'assets/db/connectdb.php';
 
 
                         $.ajax({
-                            url: "assets/include/cards.php",
+                            url: "assets/includes/cards.php",
                             method: "GET",
                             data: object,
                             success: function(data) {

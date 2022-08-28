@@ -1,1 +1,9 @@
+RewriteEngine On
 
+RewriteBase "/lapieceunique-1/"
+
+RewriteRule ^Inscription$ inscription.php
+RewriteRule ^Connexion$ connexion.php
+RewriteRule ^Deconnexion$ deconnexion.php
+RewriteRule ^Verifm$ verificationmail.php
+RewriteRule ^Changement$ changementmdp.php
