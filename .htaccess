@@ -2,6 +2,7 @@ RewriteEngine On
 
 RewriteBase "/lapieceunique-1/"
 
+RewriteRule ^Accueil$ "/lapieceunique-1/"
 RewriteRule ^Inscription$ inscription.php
 RewriteRule ^Connexion$ connexion.php
 RewriteRule ^Deconnexion$ deconnexion.php

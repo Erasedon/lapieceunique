@@ -12,7 +12,7 @@
                     $count = $prepare->rowCount();
                     if($count > 0){
                  
-                        if($mail == $result['mail_utilisateurs'] && password_verify($mdp,$result['password_utilisateurs'])){
+                        if($mail == $result['mail_utilisateurs'] && password_verify($mdp,$result['password_utilisateurs'] && $result['activation_utilisateurs'])){
                             session_start();
                             $_SESSION['role'] = $result['id_roles'];
                             $_SESSION['mail'] = $result['mail_utilisateurs'];

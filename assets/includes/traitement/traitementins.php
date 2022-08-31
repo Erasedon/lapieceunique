@@ -64,15 +64,15 @@ if(isset( $_POST['mail']) && isset( $_POST['mdp']) && isset( $_POST['prenom'])&&
     $headers[] = 'From: "Ecommerce test" <yanis.pirlet@gmail.com> ';
     // En-têtes additionnels
   
-    mail($to, $subject, $message, implode("\r\n", $headers));
-  
-
+    
+    
     $mdp = password_hash( $mdp, PASSWORD_DEFAULT);
     
     $sql = "INSERT INTO utilisateurs (prenom_utilisateurs , nom_utilisateurs , password_utilisateurs ,  mail_utilisateurs , datenaissance_utilisateurs , rue_utilisateurs , ville_utilisateurs, cp_utilisateurs , pays_utilisateurs , token_utilisateurs , id_roles, activation_utilisateurs ) VALUES (:prenom_utilisateurs , :nom_utilisateurs , :password_utilisateurs ,  :mail_utilisateurs , :datenaissance_utilisateurs , :rue_utilisateurs , :ville_utilisateurs, :cp_utilisateurs , :pays_utilisateurs , :token_utilisateurs , :id_roles, :activation_utilisateurs )"; 
     $prepare = $db->prepare($sql);   
     $prepare ->execute(array(':prenom_utilisateurs'=>$prenom, ':nom_utilisateurs' =>$nom, ':password_utilisateurs' => $mdp, ':mail_utilisateurs' => $mail, ':datenaissance_utilisateurs'=> $daten, ':rue_utilisateurs' => $rue, ':ville_utilisateurs' => $ville, ':cp_utilisateurs' => $cp, ':pays_utilisateurs' => $pays, ':token_utilisateurs' => $token, ':id_roles' => '1', ':activation_utilisateurs' => '0' ));
-
+    
+    mail($to, $subject, $message, implode("\r\n", $headers));
         header("Location: ../../../connexion.php?id=succesinscrit");
   }
 } else {

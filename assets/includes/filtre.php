@@ -29,6 +29,7 @@ include 'assets/db/connectdb.php';
                             foreach ($result as $row) {
                             ?>
                                 <div class="list-group-item checkbox">
+                                    <i class="fa-regular fa-barcode-read fa-3x"></i>
                                     <label><input type="checkbox" class="common_selector brand" value="<?php echo $row['id_genres']; ?>"> <?php echo $row['nom_genres']; ?></label>
                                 </div>
                             <?php
@@ -85,6 +86,7 @@ include 'assets/db/connectdb.php';
                         foreach ($result as $row) {
                         ?>
                             <div class="list-group-item checkbox">
+
                                 <label><input type="checkbox" class="common_selector ram" value="<?php echo $row['id_sous_categories']; ?>"> <?php echo $row['nom_sous_categories']; ?></label>
                             </div>
                         <?php
@@ -111,6 +113,7 @@ include 'assets/db/connectdb.php';
                     <input type="hidden" id="hidden_maximum_price" value="500" />
                     <p id="price_show">5 - 500</p>
                     <div id="price_range"></div>
+
                 </div>
 
             </div>
@@ -134,7 +137,7 @@ include 'assets/db/connectdb.php';
                 // Fonction qui va récupér les paramètres GET
 
                 $(document).ready(function() {
-                 
+
                     var currentURL = document.URL;
 
                     const url = new URL(window.location);
@@ -204,39 +207,33 @@ include 'assets/db/connectdb.php';
                             data: object,
                             success: function(data) {
                                 $('.filter_data').html(data);
-                                // console.log(data)
-
                             }
                         });
 
                     }
-                    i=0;
+
                     // recuperer la valeur des checkbox 
                     function get_filter(class_name) {
+                        // un array vide mit dans la variable filter & dans le tableau du class_name tout les checkbox true sont ajouter a la variable checkbox
                         var filter = [];
-                        
-                        $('.' + class_name + ':checked').each(function() {
-                            filter.push($(this).val()); 
-                            url.searchParams.set(class_name, filter);
+                        var checkbox = $('.' + class_name + ':checked'); 
+                        // ensuite on verifie si chexbox  est vide donc l'url sera vider et on modifie l'historique pour que l'utilisateur si retrouve 
+                        if(checkbox.length < 1) {
                             history.pushState({}, '', url);
-                        });
-                        
-                        $('.'+class_name).each(function() {
-                    
-                             console.log('test de false=');
-                            
-                            // console.log(this.checked === false);
-                            // url.searchParams.delete($(this));
-            
+                            url.searchParams.delete(class_name);
 
-                          
-                           history.pushState({}, '', url);
-                        });
+                        } else {
+                            // sinon si checkbox n'est pas vide  on  modifie l'url en ajoutant class_name = filter sans oublier historique .
+                            checkbox.each(function(i) {
+                                filter.push($(this).val());
+                            });
 
+                            url.searchParams.set(class_name, filter.toString());         
+                            history.pushState({}, '', url);
+                        }
+                        // on retourne le tableau sous la forme  d'une chaine de caractere 
                         return filter.toString();
-
                     }
-
 
                     $('.common_selector').on('click', function() {
                         filter_data();
@@ -250,21 +247,17 @@ include 'assets/db/connectdb.php';
                             const page = $(e.target).data('page');
                             filter_data(page, limit);
                             url.searchParams.set('page', page);
-                        history.pushState({}, '', url);
-                           
+                            history.pushState({}, '', url);
+
                         });
 
 
-
-             
                     $('.filter_data').on('click', '.limit_selector', function(e) {
                         const limit = $(e.target).data('limit');
                         filter_data(page, limit);
 
                         url.searchParams.set('limit', limit);
                         history.pushState({}, '', url);
-               
-                      
                     });
 
 
@@ -279,13 +272,12 @@ include 'assets/db/connectdb.php';
                             $('#hidden_minimum_price').val(ui.values[0]);
                             $('#hidden_maximum_price').val(ui.values[1]);
                             filter_data();
-                       
-                    }
-                });
-                
-            });
 
-            // urlresultat = history.pushState(currentURL,window.location.replace('?'+urlreplace.substr(0, urlreplace.length - 1)));  
+                        }
+                    });
+
+                });
             </script>
 
-<!-- FIN filtre -->
+            <!-- FIN filtre -->
+            <!-- urlresultat = history.pushState(currentURL,window.location.replace('?'+urlreplace.substr(0, urlreplace.length - 1)));  -->

@@ -1,7 +1,7 @@
 <?php
 
 //fetch_data.php
-var_dump($_GET);
+// var_dump($_GET);
 
 
 include('../db/connectdb.php');	
@@ -9,7 +9,8 @@ include('../db/connectdb.php');
 if(isset($_GET["action"]))
 {
 	$query = "
-	SELECT * FROM articles a, genres g, categories c, sous_categories sc WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories 
+	SELECT * FROM articles a, genres g, categories c, sous_categories sc 
+	WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories 
 	";
 	if(isset($_GET["minimum_price"], $_GET["maximum_price"]) && !empty($_GET["minimum_price"]) && !empty($_GET["maximum_price"]))
 	{
@@ -31,30 +32,11 @@ if(isset($_GET["action"]))
 		$query .= "
 		 AND a.id_sous_categories IN(".$ram_filter.")
 		";
-		/* jjj */ 
-		// var_dump($_GET["ram"]);
-		// var_dump(explode(",", $_GET["ram"]));
-		// $ram_filter = explode(",", $_GET["ram"]);
-
 		
-
-
-		// var_dump(explode(',',$ram_filter));
-		// $query .= "
-		//  AND a.id_sous_categories IN('".json_encode($ram_filter)."')
-		// ";
 	}
 	if(isset($_GET["storage"]))
 	{
-		// $storage_filter = explode("','", $_GET["storage"]);
-		// $arrayc= implode($storage_filter);
-		// var_dump($arrayc);
-		// // var_dump($test = "AND a.id_categories IN('".json_encode($storage_filter)."')");
-		// var_dump(intval($arrayc));
 		
-		// $test =intval($storage_filter);
-	
-
 		$query .= "
 		 AND a.id_categories IN(".$_GET["storage"].")
 		";
@@ -72,16 +54,13 @@ if(isset($_GET["action"]))
 	
 	if(isset($_GET["page"]))
 	{	
-	
-			$valref = ($limit*$_GET['page'])-$limit; 
-			$query .= "LIMIT ".$valref.",".$limit."";
-			$statement =$db->prepare($query);
-			$statement->execute();
-			$result = $statement->fetchAll();
-			$total_row = $statement->rowCount();
-			
-			
-		}
+		$valref = ($limit*$_GET['page'])-$limit; 
+		$query .= "LIMIT ".$valref.",".$limit."";
+		$statement =$db->prepare($query);
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$total_row = $statement->rowCount();		
+	}
 		
 	$output = '';
 	if($total_pag > 0)
@@ -92,24 +71,32 @@ if(isset($_GET["action"]))
 			<div class="col-sm-2 col-lg-3 col-md-3">
 				<div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
 					<img src="'. $row['image1_articles'] .'" alt="" class="img-responsive" >
-					<p align="center"><strong><a href="poster.php?id_article= '.$row['id_articles'].'">'. $row['nom_articles'] .'</a></strong></p>
-					<h4 style="text-align:center;" class="text-danger" >'. $row['prix_articles'] .'€</h4>
-					<p>
-					Genres : '. $row['nom_genres'] .' <br />
-					Categories : '. $row['nom_categories'] .' <br />
-					listes personnages : '. $row['nom_sous_categories'] .'
-				 
-					</p>
-			
+					<p align="center"><strong><a href="poster.php?id_article= '.$row['id_articles'].'">'. $row['nom_articles'] . '</a></strong></p>
+						<h4 style="text-align:center;" class="text-danger" >' . $row['prix_articles'] . '€</h4>
+						<p>
+							Genres : '. $row['nom_genres'] .' <br />
+							Categories : '. $row['nom_categories'] .' <br />
+							listes personnages : '. $row['nom_sous_categories'] .'
+						</p>
 				</div>
-
 			</div>
-     
 			';
 		}
+		$output.='
+		<div class="col-sm-2 col-lg-8 col-md-3 limiter"> 
+			<div class="hint-text">le limitateur est à <b>'.$limit.'</b> sur <b>334</b> resultat </div>
+			<br>
+			<br>
+				<button class ="limit_selector " data-limit="5">5</button>    
+				<button class ="limit_selector " data-limit="10">10</button>    
+				<button class ="limit_selector " data-limit="20">20</button>    
+		</div>
+	</div>
+	
+	';	
 		$output .= '<div class="col-sm-2 col-lg-8 col-md-3">
 		<ul class="pagination">
-		<li class="page-item "><button class="page pag_selector " data-page="Precedent">Precedent</button></li>';
+		<li class="page-item "><button class="page pag_selector " data-page="precedent">Precedent</button></li>';
 
 			for($i=1;$nombre_page >= $i ;$i++)
 			{
@@ -118,24 +105,12 @@ if(isset($_GET["action"]))
 					';
 			}
 		$output.='
-				<li class="page-item "><button class="page pag_selector " data-page="Suivant">Suivant</button></li>
+				<li class="page-item "><button class="page pag_selector " data-page="suivant">Suivant</button></li>
 			</ul>
 		</div>';
-		$output.='<div class="col-sm-2 col-lg-8 col-md-3 limiter"> 
-		<div class="hint-text">le limitateur est à <b>'.$limit.'</b> sur <b>334</b> resultat </div>
-		<br>
-		<br>
-		<button class ="limit_selector " data-limit="5">5</button>    
-		<button class ="limit_selector " data-limit="10">10</button>    
-		<button class ="limit_selector " data-limit="20">20</button>    
-		</div>
-</div>';
-		
 	}
 	else
-	{
-		$output = '<h3>No Data Found</h3>';
-	}
+	{ $output = '<h3>No Data Found</h3>'; }
 	echo $output;
 }
 
@@ -234,4 +209,3 @@ echo $output;
 }
 */
 ?>
-

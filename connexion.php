@@ -26,6 +26,7 @@
     <body>
         <?php include "assets/includes/navbar.php"; ?>
         <?php include "assets/includes/co.php"; ?>
-        <?php include "assets/includes/footer.php"; ?>
+        <script src="assets/js/navbar.js"></script>
+       
     </body>
 </html>
