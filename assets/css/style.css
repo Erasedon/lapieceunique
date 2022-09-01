@@ -7,6 +7,7 @@
       padding:0;
       overflow-x: hidden;
       font-family: 'Open Sans', sans-serif;
+    
   }
 
   
@@ -22,6 +23,7 @@
     backdrop-filter: blur(4px);
     color: #000;
     z-index: 999;
+   
 }
 
 #nav-logo {
@@ -168,6 +170,7 @@
 .container-filtre-tb{
     width: 100%;
     display: flex;
+    
 }
 .categorie-filtre-tb {
     width: 16%;
@@ -178,6 +181,7 @@
     width: 100%;
     margin-top: 80px;
     line-height: 35px;
+    
   }
   .button-filtre {
     width: 90px;
@@ -376,6 +380,7 @@ font-size: 13Px;
     width: 100%;
     margin-top: 50px;
     font-family: 'Oswald_Light';
+    
 }
 
 .inscription {
@@ -703,6 +708,6 @@ form {
 
 	text-align:center; 
 	background: url('../img/loader.gif') no-repeat center; 
-	height: 250px;
+	height: 550px;
 }
 

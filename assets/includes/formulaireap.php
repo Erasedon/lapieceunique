@@ -20,7 +20,7 @@ if ((!empty($_GET['id_article'])))
 
         <div class="error"></div>
 
-        <form method="post" action="assets/include/traitement/traitementmod.php" id="formajax">
+        <form method="post" action="assets/includes/traitement/traitementmod.php" id="formajax">
             <div class="model_deux">
                     <label for="">Nom du Produit:</label>
                     <input type="text" name="nomap" value="<?php echo $result['nom_articles'] ?>" required>
@@ -85,7 +85,7 @@ if ((!empty($_GET['id_article'])))
 
         <div class="error"></div>
 
-        <form method="post" action="assets/include/traitement/traitementajout.php" id="formajax">
+        <form method="post" action="assets/includes/traitement/traitementajout.php" id="formajax">
             <div class="model_deux">
                     <label for="">Nom du Produit:</label>
                     <input type="text" name="nomap" required>

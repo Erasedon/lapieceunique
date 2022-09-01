@@ -1,3 +1,7 @@
+<?php 
+  session_start();
+
+?> 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -23,8 +27,8 @@
 </head>
 <body>
     <?php 
-    include 'assets/include/navbar.php'; 
-    include 'assets/include/scanner.php';  
+    include 'assets/includes/navbar.php'; 
+    include 'assets/includes/scanner.php';  
 
     
     ?>
