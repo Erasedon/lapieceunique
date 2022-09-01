@@ -1,13 +1,13 @@
 <?php 
 include '../../db/connectdb.php'; 
 
-if(isset( $_POST['nomap']) && isset( $_POST['dateap']) && isset( $_POST['image']) && isset( $_POST['Prixap']) && isset( $_POST['Descriptionap']) && isset( $_POST['barretxtap']) && isset( $_POST['quantité'])){
+if(isset( $_POST['nomap']) && isset( $_POST['dateap']) && isset( $_POST['Prixap']) && isset( $_POST['Descriptionap']) && isset( $_POST['barretxtap']) && isset( $_POST['Quantité'])){
     $nomap = htmlspecialchars( $_POST['nomap']); 
     $dateap =  htmlspecialchars($_POST['dateap']); 
     $Prixap =  htmlspecialchars($_POST['Prixap']);
     $cbpap =  htmlspecialchars($_POST['cbpap']);
-    $hauteur =  htmlspecialchars($_POST['hauteur']);
-    $largueurap =  htmlspecialchars($_POST['largueur']);
+    $hauteur =  htmlspecialchars($_POST['hauteurap']);
+    $largueurap =  htmlspecialchars($_POST['largeurap']);
     $descriptionap =  htmlspecialchars($_POST['Descriptionap']);
     $barretxtap =  htmlspecialchars($_POST['barretxtap']);
     $photopap =  htmlspecialchars($_POST['image']);
