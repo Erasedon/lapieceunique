@@ -1,6 +1,6 @@
 <?php 
 
-include 'assets/db/connectdb.php'; 
+include '../../db/connectdb.php'; 
 if(isset( $_POST['nomfo']) && isset( $_POST['prenomfo']) && isset( $_POST['datefo']) && isset( $_POST['mailfo']) && isset( $_POST['adressefo']) && isset( $_POST['cpfo']) && isset( $_POST['villefo']) && isset( $_POST['barretxtfo']) && isset( $_POST['cifo']) && isset( $_POST['prixachat']) && isset( $_POST['quantité']) ){
     $nomfo = htmlspecialchars( $_POST['nomfo']); 
     $prenomfo =  htmlspecialchars($_POST['prenomfo']); 

@@ -24,17 +24,17 @@
       $to  = $mail ; // notez la virgule
       
       // Sujet
-      $subject = 'Ecommerce Réinitialiser votre Mot de passe ';
+      $subject = 'Lapieceunique Réinitialiser votre Mot de passe ';
       
       // message
       $message = "
       <html>
       <head>
-      <title>Ecommerce</title>
+      <title>Lapieceunique</title>
       </head>
       <body>
       <H1>Voici l\' étape pour réinitialiser votre Mot de passe</H1>
-      <p><a href='https://yanis.simplon-charleville.fr/ecommerce/assets/includes/db/traitementtoken.php?reset=$token'> cliquer ici </a></p>
+      <p><a href='https://divbody/lapieceunique/assets/includes/traitement/traitementtoken.php?reset=$token'> cliquer ici </a></p>
       </body>
       </html>
       ";

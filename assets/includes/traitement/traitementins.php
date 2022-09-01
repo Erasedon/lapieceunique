@@ -48,12 +48,13 @@ if(isset( $_POST['mail']) && isset( $_POST['mdp']) && isset( $_POST['prenom'])&&
     $message = "
     <html>
       <head>
-      <title>Voici le mail de validation de votre compte</title>
+      <title>Bienvenu dans l'entreprise Lapieceunique</title>
       </head>
       <body>
-      <H1>Felicitations voici l'étape final</H1>
-      <p> Bonjour $nom</p>
-      <p><a href='https://yanis.simplon-charleville.fr/ecommerce/assets/includes/activation.php?C=$token'> cliquer ici </a></p>
+      <H1> Bonjour $nom</H1>
+      <H2>Vous etes bien inscrit dans la gestionnaire de l'entreprise lapieceunique</H2>
+      <p> la dernier étape est de valider le compte </p>
+      <p><a href='https://divbody.com/lapieceunique/assets/includes/activation.php?C=$token'> cliquer ici </a></p>
       </body>
     </html>
     ";
@@ -61,7 +62,7 @@ if(isset( $_POST['mail']) && isset( $_POST['mdp']) && isset( $_POST['prenom'])&&
     // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
     $headers[] = 'MIME-Version: 1.0';
     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-    $headers[] = 'From: "Ecommerce test" <yanis.pirlet@gmail.com> ';
+    $headers[] = 'From: "G.LAPIECEUNIQUE" <yanis.pirlet@gmail.com> ';
     // En-têtes additionnels
   
     

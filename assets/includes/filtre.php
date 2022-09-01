@@ -51,9 +51,7 @@ include 'assets/db/connectdb.php';
 
                         <div style="height: 180px; overflow-y: auto; overflow-x: hidden;">
                             <?php
-                            $query = "
-                                SELECT * FROM categories ORDER BY id_categories 
-                                ";
+                            $query = "SELECT * FROM categories ORDER BY id_categories";
                             $statement = $db->prepare($query);
                             $statement->execute();
                             $result = $statement->fetchAll();

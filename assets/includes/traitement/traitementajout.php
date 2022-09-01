@@ -1,5 +1,5 @@
 <?php 
-include 'assets/db/connectdb.php'; 
+include '../../db/connectdb.php'; 
 
 if(isset( $_POST['nomap']) && isset( $_POST['dateap']) && isset( $_POST['image']) && isset( $_POST['Prixap']) && isset( $_POST['Descriptionap']) && isset( $_POST['barretxtap']) && isset( $_POST['quantité'])){
     $nomap = htmlspecialchars( $_POST['nomap']); 

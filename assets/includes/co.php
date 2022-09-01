@@ -1,9 +1,33 @@
 <div class="container">
     <div class="connexion">
         <h3>Connexion :</h3>
-        <?php if (isset($_GET['id'])){ ?>
-            <p class="sucess">Vous êtes bien inscrit, vous pouvez maintenant vous connecter !</p>
-        <?php } ?>
+        <?php 
+            if(isset($_GET['id'])){
+                    switch ($_GET['id']){
+                        case "ermailmdp":
+                            echo "<p class='error'> Connexion impossible :<br> Email ou Mot de passe oublié</p>";
+                            break;
+                        case "succesinscrit":
+                            echo " <p class='sucess'>Vous êtes bien inscrit, vous pouvez maintenant vous connecter !</p>";
+                            break;
+                            case "erexistpas":
+                            echo "<p class='error'> Vous etes pas inscrit   </p>";
+                            break;
+                            case "pasvalider":
+                            echo "<p class='error'>Vous n'etes pas valider </p>";
+                            break;
+                            case "ncompris":
+                                echo "<p class='error'> Erreur est le contenu </p>";
+                                break;
+                                case "demm":
+                                    echo "<p class='error'>Votre demande de reinitiation de votre mot de passe est bien prit en compte </p>";
+                                    break;
+                                    case "erchangmdp":
+                                    echo "<p class='error'>Votre demande de reinitiation de votre mot de passe à expirer</p>";
+                                    break;
+                        }
+                }
+        ?> 	 
 
         <form method="post" action="assets/includes/traitement/traitementco.php">
             <label for="" class="titr_la">Adresse mail :</label>
@@ -26,24 +50,3 @@
         </div>
     </div>
 </div>
-<?php 
-  if(isset($_GET['id'])){
-            switch ($_GET['id']){
-                case "ermailmdp":
-                    echo "<p class='messageerreur'> Connexion impossible :<br> Email ou Mot de passe oublié</p>";
-                    break;
-                    case "erexistpas":
-                      echo "<p style='color: white; justify-content: center'> Vous etes pas inscrit ou vous n'etes pas valider </p>";
-                      break;
-                      case "ncompris":
-                          echo "<p style='color: white'> Erreur est le contenu </p>";
-                          break;
-                          case "demm":
-                            echo "<p class='messageerreur'>Votre demande de reinitiation de votre mot de passe est bien prit en compte </p>";
-                            break;
-                            case "erchangmdp":
-                              echo "<p class='messageerreur'>Votre demande de reinitiation de votre mot de passe à expirer</p>";
-                              break;
-                }
-        }
-        ?> 	 
