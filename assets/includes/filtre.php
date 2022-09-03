@@ -12,14 +12,12 @@ include 'assets/db/connectdb.php';
             <!-- filtre -->
             <div class="filtre">
 
-                <div class="card shadow mt-4">
+                <div cl ass="card mt-4">
                     <div class="card-header">
-
-                    </div>
-                    <div class="card-body">
-                        <h4>Genre</h4>
-                        <hr>
-                        <div>
+                        <div class="card-body">
+                            <h4>Genre</h4>
+                            <hr>
+                            <div>
                             <?php
 
                             $query = "SELECT * FROM genres ORDER BY id_genres";
@@ -40,9 +38,10 @@ include 'assets/db/connectdb.php';
                             <div>
 
                             </div>
-
                         </div>
-                    </div>
+                        
+                        </div>
+                    
                     <!-- TEST -->
 
                     <div class="card-body">
@@ -95,7 +94,7 @@ include 'assets/db/connectdb.php';
 
                 </div>
             </div>
-
+            </div>
 
 
 
@@ -117,14 +116,14 @@ include 'assets/db/connectdb.php';
             </div>
 
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <br />
             <div class="row filter_data">
 
 
             </div>
 
-
+        </div>
 
 
             <!-- FIN filtre -->
