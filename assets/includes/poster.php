@@ -1,6 +1,6 @@
-
-    <div class="container art">
+<div class="container art">
 <?php
+    include 'assets/db/connectdb.php'; 
 $id_articles = $_GET["id_article"];
 
 if ((empty($_GET['id_article'])))
@@ -27,11 +27,10 @@ if ($affichee['nombre'] == 0)
 }
 else {
    
-$sqlarticle = "SELECT * FROM articles a, categories c, sous_categories sc, genres g, marques m
+$sqlarticle = "SELECT * FROM articles a, categories c, sous_categories sc, genres g
 WHERE a.id_categories=c.id_categories 
 AND a.id_sous_categories=sc.id_sous_categories
 AND a.id_genres=g.id_genres
-AND a.id_marques=m.id_marques
 and a.id_articles = " . $_GET["id_article"] . "";
 $requetearticle = $db->prepare($sqlarticle);
 $requetearticle->execute();

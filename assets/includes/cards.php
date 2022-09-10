@@ -1,9 +1,4 @@
 <?php
-
-//fetch_data.php
-// var_dump($_GET);
-
-
 include('../db/connectdb.php');	
 
 if(isset($_GET["action"]))
@@ -52,6 +47,7 @@ if(isset($_GET["action"]))
 	$nombre_page = ceil($total_pag/$limit);
 	
 	
+	
 	if(isset($_GET["page"]))
 	{	
 		$valref = ($limit*$_GET['page'])-$limit; 
@@ -68,9 +64,10 @@ if(isset($_GET["action"]))
 		foreach($result as $row)
 		{
 			$output .= '
-			<div class="col-sm-2 col-lg-3 col-md-3">
-				<div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px; height:450px;">
-					<img src="'. $row['image1_articles'] .'" alt="" class="img-responsive" >
+			<div class="col-lg-4">
+				<div class="categorie">
+				<div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px;">
+					<img src="'. $row['image1_articles'] .'" alt="" class="figure-img img-fluid rounded" >
 					<p align="center"><strong><a href="poster.php?id_article= '.$row['id_articles'].'">'. $row['nom_articles'] . '</a></strong></p>
 						<h4 style="text-align:center;" class="text-danger" >' . $row['prix_articles'] . '€</h4>
 						<p>
@@ -79,11 +76,12 @@ if(isset($_GET["action"]))
 							listes personnages : '. $row['nom_sous_categories'] .'
 						</p>
 				</div>
+				</div>
 			</div>
 			';
 		}
 		$output.='
-		<div class="col-sm-2 col-lg-8 col-md-3 limiter"> 
+		<div class="col-sm-2 col-lg-8 col-md-3 "> 
 			<div class="hint-text">le limitateur est à <b>'.$limit.'</b> sur <b>334</b> resultat </div>
 			<br>
 			<br>
