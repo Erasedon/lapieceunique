@@ -1,9 +1,4 @@
 <?php
-
-//fetch_data.php
-// var_dump($_GET);
-
-
 include('../db/connectdb.php');	
 
 if(isset($_GET["action"]))
@@ -50,6 +45,7 @@ if(isset($_GET["action"]))
 	$result = $statement->fetchAll();
 	$total_pag = $statement->rowCount();
 	$nombre_page = ceil($total_pag/$limit);
+	
 	
 	
 	if(isset($_GET["page"]))

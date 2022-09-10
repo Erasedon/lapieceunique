@@ -17,56 +17,55 @@
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
 
-        var page = (getParameterByName('page') == null) ? url.searchParams.get('page') : getParameterByName('page');
-        var limit = (getParameterByName('limit') == null) ? url.searchParams.get('limit') : getParameterByName('limit');
- 
+        var page = (getParameterByName('page') == null) ? 1  : getParameterByName('page');
+        var limit = (getParameterByName('limit') == null) ? 5 : getParameterByName('limit');
+          
 
         filter_data(page, limit);
 
-        function filter_data(page, limit) {
+        function filter_data(page=(url.searchParams.get('page')== null) ? 1  :url.searchParams.get('page') , limit=(url.searchParams.get('limit')== null) ? 5  :url.searchParams.get('limit') ) {
 
             $('.filter_data').html('<div id="loading" style="" ></div>');
             var action = 'fetch_data';
             var minimum_price = $('#hidden_minimum_price').val();
             var maximum_price = $('#hidden_maximum_price').val();
-
+         
             var brand = get_filter('brand');
             var ram = get_filter('ram');
             var storage = get_filter('storage');
 
 
-            var object = {}
+            var datas = {}
 
             if (action = !null) {
-                object.action = action;
+                datas.action = action;
             }
             if (limit != null) {
-                object.limit = limit;
+                datas.limit = limit;
             }
             if (page != null) {
-                object.page = page;
+                datas.page = page;
             }
             if (minimum_price != "") {
-                object.minimum_price = minimum_price;
+                datas.minimum_price = minimum_price;
             }
             if (maximum_price != "") {
-                object.maximum_price = maximum_price;
+                datas.maximum_price = maximum_price;
             }
             if (brand != "") {
-                object.brand = brand;
+                datas.brand = brand;
             }
             if (ram != "") {
-                object.ram = ram;
+                datas.ram = ram;
             }
             if (storage != "") {
-                object.storage = storage;
+                datas.storage = storage;
             }
-
 
             $.ajax({
                 url: "assets/includes/cards.php",
                 method: "GET",
-                data: object,
+                data: datas,
                 success: function(data) {
                     $('.filter_data').html(data);
                 }
@@ -90,6 +89,7 @@
                     filter.push($(this).val());
                 });
 
+                
                 url.searchParams.set(class_name, filter.toString());         
                 history.pushState({}, '', url);
             }
@@ -97,30 +97,33 @@
             return filter.toString();
         }
         
-                            $('.common_selector').on('click', function() {
-                                filter_data();
-                            });
-        
-        
-                            $('.filter_data').on(
-                                'click',
-                                '.pag_selector',
-                                function(e) {
-                                    const page = $(e.target).data('page');
-                                    url.searchParams.set('page', page);
-                                    history.pushState({}, '', url);
-                                    filter_data(page, limit);
-        
-                                });
-        
-        
-                            $('.filter_data').on('click', '.limit_selector', function(e) {
-                                const limit = $(e.target).data('limit');
-                                
-                                url.searchParams.set('limit', limit);
-                                history.pushState({}, '', url);
-                                filter_data(page, limit);
-                            });
+        // onclick des checkbox du filtre 
+        $('.common_selector').on('click', function() {
+            filter_data();
+        });
+
+        // onclick de la pagination des posters 
+        $('.filter_data').on(
+            'click',
+            '.pag_selector',
+            function(e) {
+                const page = $(e.target).data('page');
+                url.searchParams.set('page', page);
+                history.pushState({}, '', url);
+                // var limit =url.searchParams.get('limit');
+                filter_data(page, limit);
+
+            });
+
+        //onclick de la limite de nombre de posters afficher 
+        $('.filter_data').on('click', '.limit_selector', function(e) {
+            const limit = $(e.target).data('limit');
+            
+            url.searchParams.set('limit', limit);
+            history.pushState({}, '', url);
+            // var page =url.searchParams.get('page');
+            filter_data(page, limit);
+        });
 
 
         $('#price_range').slider({

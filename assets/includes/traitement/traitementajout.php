@@ -4,7 +4,6 @@ include '../../db/connectdb.php';
 if(isset( $_POST['nomap']) && isset( $_POST['Prixap'])&& isset( $_POST['hauteurap'])&& isset( $_POST['largeurap']) && isset( $_POST['Descriptionap']) && isset( $_POST['barretxtap']) && isset( $_POST['Quantite'])){
     $nomap = htmlspecialchars( $_POST['nomap']); 
     $Prixap =  htmlspecialchars($_POST['Prixap']);
-    // $cbpap =  htmlspecialchars($_POST['cbpap']);
     $Quantite =  htmlspecialchars($_POST['Quantite']);
     $hauteurap =  htmlspecialchars($_POST['hauteurap']);
     $largeurap =  htmlspecialchars($_POST['largeurap']);
