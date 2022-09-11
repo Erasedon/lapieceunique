@@ -3,7 +3,6 @@
 include '../../db/connectdb.php'; 
     $cbpfo = $_POST['cb'];
 
-
        $sql = "SELECT * FROM articles WHERE cbp_articles = :cbp_articles";
        $prepare = $db->prepare($sql);   
        $prepare ->execute(array(':cbp_articles' => $cbpfo));    
@@ -17,8 +16,8 @@ include '../../db/connectdb.php';
          }
        }
        if ($count == 0) {
-        
-            header("Location:../../../scanner?ernotr");
+  
+            header("Location:../../../scanner.php?ernotr");
           
       }
 

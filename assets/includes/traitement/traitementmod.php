@@ -4,18 +4,18 @@
 include '../../db/connectdb.php'; 
 
 if(isset( $_POST['nomap']) && isset( $_POST['Prixap'])&& isset( $_POST['hauteurap'])&& isset( $_POST['largeurap']) && isset( $_POST['Descriptionap']) && isset( $_POST['barretxtap']) && isset( $_POST['Quantite'])){
-  $nomap = htmlspecialchars( $_POST['nomap']); 
-  $Prixap =  htmlspecialchars($_POST['Prixap']);
-  // $cbpap =  htmlspecialchars($_POST['cbpap']);
-  $Quantite =  htmlspecialchars($_POST['Quantite']);
-  $hauteurap =  htmlspecialchars($_POST['hauteurap']);
-  $largeurap =  htmlspecialchars($_POST['largeurap']);
-  $selgenres =  htmlspecialchars($_POST['selgenres']);
-  $selcat =  htmlspecialchars($_POST['selcat']);
-  $selsouscat =  htmlspecialchars($_POST['selsouscat']);
-  $descriptionap =  htmlspecialchars($_POST['Descriptionap']);
-  $barretxtap =  htmlspecialchars($_POST['barretxtap']);
-  // $photopap =  htmlspecialchars($_POST['image']);
+        $nomap = htmlspecialchars( $_POST['nomap']); 
+        $Prixap =  htmlspecialchars($_POST['Prixap']);
+        // $cbpap =  htmlspecialchars($_POST['cbpap']);
+        $Quantite =  htmlspecialchars($_POST['Quantite']);
+        $hauteurap =  htmlspecialchars($_POST['hauteurap']);
+        $largeurap =  htmlspecialchars($_POST['largeurap']);
+        $selgenres =  htmlspecialchars($_POST['selgenres']);
+        $selcat =  htmlspecialchars($_POST['selcat']);
+        $selsouscat =  htmlspecialchars($_POST['selsouscat']);
+        $descriptionap =  htmlspecialchars($_POST['Descriptionap']);
+        $barretxtap =  htmlspecialchars($_POST['barretxtap']);
+        // $photopap =  htmlspecialchars($_POST['image']);
     
 
     $sql = "SELECT * FROM articles WHERE id_articles = :id_articles AND nom_articles=:nom_articles AND description_articles=:descriptionap AND prix_articles=:prixap AND cbp_articles=:cbp_articles AND hauteur_articles=:hauteur_articles AND largeur_articles=:largeur_articles AND id_categories=:id_categories AND id_sous_categories=:id_sous_categories AND id_genres=:id_genres";
@@ -61,18 +61,45 @@ if(isset( $_POST['nomap']) && isset( $_POST['Prixap'])&& isset( $_POST['hauteura
     $prepare ->execute(array(':nom_articles' => $nomap));    
     $count = $prepare->rowCount();
 
-    if ( $count == 1) {
+    if($count == 1) {
+   
       while($result = $prepare->fetch()) {
         if($nomap == $result['nom_articles']){
-          $sql = "UPDATE stocks SET quantite_stock=:quantite_stock WHERE id_articles = :id_articles";        
-          $prepare = $db->prepare($sql);   
-          $prepare ->execute(array(':id_articles'=>$result['id_articles'], ':quantite_stock' => $Quantite));
-  
-          header("Location:../../../poster.php?id_article= ".$result['id_articles']."");
-        }
+      //             if(isset($_FILES['file'])){
+      //               $tmpName = $_FILES['file']['tmp_name'];
+      //               $name = $_FILES['file']['name'];
+      //               $size = $_FILES['file']['size'];
+      //               $error = $_FILES['file']['error'];
+                
+      //               $tabExtension = explode('.', $name);
+      //               $extension = strtolower(end($tabExtension));
+                
+      //               $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+      //               $maxSize = 400000;
+                
+      //               if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+                
+      //                   $uniqueName = uniqid('', true);
+      //                   //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
+      //                   $file = $uniqueName.".".$extension;
+      //                   //$file = 5f586bf96dcd38.73540086.jpg
+                
+      //                   move_uploaded_file($tmpName, '../assets/uploads/'.$file);
+                
+      //                   $sql = "INSERT INTO images (nom_images,url_images, id_articles) VALUES (:nom_images, :url_images,:id_articles )"; 
+      //                   $prepare = $db->prepare($sql);   
+      //                   $prepare ->execute(array(':nom_images'=>$name, ':url_images' => $file,':id_articles' => $result['id_articles'] ));
+                
+                         header("Location:../../../poster.php?id_article=".$result['id_articles']."");
+                    
+                    }
+                    else{
+                      header("Location:../crud.php?id=erreuru");
+                    }
+                
+         }
       }
-    }
-    }
+    // }
+    // }
+  }
 }   
-
-

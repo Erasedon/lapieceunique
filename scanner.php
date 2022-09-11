@@ -26,6 +26,9 @@
         crossorigin="anonymous" 
         referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+    <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
+
     
     <link rel="stylesheet" href="assets/css/style.css">
     <title>La piece unique</title>
@@ -38,6 +41,8 @@
     
     ?>
      <script src="assets/js/navbar.js"></script>
-     <script src="assets/js/scan.js"></script>
+     <script type="text/javascript" src="assets\js\controllerscan.js"></script>
+    <script type="text/javascript" src="assets\js\scanner.js"></script>
 </body>
 </html>
+

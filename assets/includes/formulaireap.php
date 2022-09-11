@@ -9,10 +9,7 @@ if ((!empty($_GET['id_article'])))
     $result = $prepare->fetch();
 
 
-    $sql1 = "SELECT * FROM stocks WHERE id_articles = :id_articles";
-    $prepare1 = $db->prepare($sql1);   
-    $prepare1 ->execute(array(':id_articles' => $_GET['id_article']));
-    $result1 = $prepare1->fetch();
+  
     
     $reqgenres = "SELECT * FROM genres";
     $preparegenres = $db->prepare($reqgenres);   
@@ -32,7 +29,7 @@ if ((!empty($_GET['id_article'])))
 
 <div class="container">
     <div class="inscription">
-        <h3> D'ajout de poster :</h3>
+        <h3> Modifier le poster :</h3>
 
         <div class="error"></div>
 
@@ -61,7 +58,7 @@ if ((!empty($_GET['id_article'])))
             </div>
             <div class="model_deux">
                 <label for="">Quantité :</label>
-                <input type="text" name="Quantite" value="<?php echo $result1['quantite_stock'] ?>" required>
+                <input type="text" name="Quantite" value="<?php echo $result['quantite_articles'] ?>" required>
             </div>
             <div class="row g-3">
             <div class="col-md">
@@ -75,7 +72,7 @@ if ((!empty($_GET['id_article'])))
                                 if($result['nom_genres'] === $row['nom_genres']){
                                 
                                 ?>
-                                    <option selected><?php echo $row['nom_genres'] ?></option>
+                                    <option value="<?php echo $row['id_genres'] ?>" selected><?php echo $row['nom_genres'] ?></option>
                                 <?php
                                 }
                                 ?>
@@ -97,7 +94,7 @@ if ((!empty($_GET['id_article'])))
                                 if($result['nom_categories'] === $row['nom_categories']){
                                 
                                     ?>
-                                        <option selected><?php echo $row['nom_categories'] ?></option>
+                                        <option value="<?php echo $row['id_categories'] ?>" selected><?php echo $row['nom_categories'] ?></option>
                                     <?php
                                     }
                                     ?>
@@ -120,7 +117,7 @@ if ((!empty($_GET['id_article'])))
                                 if($result['nom_sous_categories'] === $row['nom_sous_categories']){
                                 
                                     ?>
-                                        <option selected><?php echo $row['nom_sous_categories'] ?></option>
+                                        <option value="<?php echo $row['id_sous_categories'] ?>" selected><?php echo $row['nom_sous_categories'] ?></option>
                                     <?php
                                     }
                                     ?>
@@ -132,22 +129,38 @@ if ((!empty($_GET['id_article'])))
                         <label for="floatingSelectGrid">listes des sous_categories</label>
                     </div>
                 </div>
-            </div>
-            <div class="model_un">
-                <!-- <div class="nom">
-                    <label for="">Code barre :</label>
-                    <input type="file" name="cbpap" required>
-                </div> -->
-                <div class="prenom">
-                    <label for="">Code barre :</label>
-                    <input type="text" name="barretxtap" value="<?php echo $result['cbp_articles'] ?>" required>
+            </div> 
+            <div class="model_deux">
+               
+               </div>
+             <div class="row g-2">
+            <div class="col-md">
+                    <div class="form-floating">
+                         <a id="startButton"><button class="btn btn-outline-secondary" type="button">Start</button></a>
+                        <a  id="resetButton"><button class="btn btn-outline-secondary" type="button">  Reset</button></a>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating">
+                            <div id="sourceSelectPanel" style="display:none">
+                                 <label for="sourceSelect">Change video source:</label>
+                                 <select id="sourceSelect" style="max-width:400px">
+                                </select>
+                            </div>
+                    </div>
                 </div>
             </div>
+            <div>
+                <label for="">Code barre :</label>          
+                <input type="text" id="result" name="barretxtap"  required>
+           </div>
 
-
-            <div class="model_deux">
-                <label for=""></label>
-
+            <div class="model_deux">    
+                <video id="video" style="border: 1px solid gray; max-width:250px"></video>
+            </div>    
+           
+           <div class="model_deux">
+               
             </div>
             <input type="submit" class="sub" value="Enregistrer">
             <button type="submit" class="sub">
@@ -259,10 +272,11 @@ if ((!empty($_GET['id_article'])))
                 </div>
             </div>
             <div class="model_un">
-                <!-- <div class="nom">
+                <div class="nom">
                     <label for="">Code barre :</label>
-                    <input type="file" name="cbpap" required>
-                </div> -->
+                    <!-- <input type="file" name="cbpap" required> -->
+                    <input type="file" name="file"  class="form-control" id="file_browser">
+                </div>
                 <div class="prenom">
                     <label for="">Code barre :</label>
                     <input type="text" name="barretxtap" required>

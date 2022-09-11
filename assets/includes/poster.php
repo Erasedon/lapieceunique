@@ -9,14 +9,14 @@ if ((empty($_GET['id_article'])))
 }
 else {
 
-$sqll = "SELECT COUNT(*) as nombre FROM stocks
-WHERE id_articles = " . $_GET["id_article"] . "";
+$sqll = "SELECT COUNT(*) as nombre FROM articles
+WHERE id_articles = ". $_GET["id_article"] . "";
 $requetee = $db->prepare($sqll);
 $requetee->execute();
 $affichee = $requetee->fetch();
 
-$sqls = "SELECT * FROM stocks
-WHERE id_articles = " . $_GET["id_article"] . "";
+$sqls = "SELECT * FROM articles
+WHERE id_articles = ". $_GET["id_article"] . "";
 $requetes = $db->prepare($sqls);
 $requetes->execute();
 $affiches = $requetes->fetch();
@@ -27,35 +27,34 @@ if ($affichee['nombre'] == 0)
 }
 else {
    
-$sqlarticle = "SELECT * FROM articles a, categories c, sous_categories sc, genres g
+$sqlarticle = "SELECT * FROM articles a,images i, categories c, sous_categories sc, genres g
 WHERE a.id_categories=c.id_categories 
 AND a.id_sous_categories=sc.id_sous_categories
 AND a.id_genres=g.id_genres
-and a.id_articles = " . $_GET["id_article"] . "";
+AND a.id_articles=i.id_articles
+and a.id_articles = ". $_GET["id_article"] . "";
 $requetearticle = $db->prepare($sqlarticle);
 $requetearticle->execute();
 $affichearticle = $requetearticle->fetch();
 ?>
   <div class="affichermess"></div>
 
-      
-  
   <div class="container_article">
       
       <div class="article">
           
           <div class="photogauche">
               <div class="photo" onclick="choixPhoto(0)" id="photo1">
-                <img src="<?php echo $affichearticle['image1_articles']; ?>"
-                alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
+                <img src="<?php echo $affichearticle['url_images']; ?>"
+                alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                 
-                <div class="photo" onclick="choixPhoto(1)" id="photo2">
-                    <img src="<?php echo $affichearticle['image2_articles']; ?>"
-                    alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
+                 <div class="photo" onclick="choixPhoto(1)" id="photo2">
+                    <img src="<?php echo $affichearticle['url_images']; ?>"
+                alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                     
                 <div class="photo" onclick="choixPhoto(2)" id="photo3">
-                    <img src="<?php echo $affichearticle['image3_articles']; ?>"
-                    alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
+                      <img src="<?php echo $affichearticle['url_images']; ?>"
+                alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                 </div>
                 
                 <div id="afficher2"></div>
@@ -63,26 +62,20 @@ $affichearticle = $requetearticle->fetch();
                 <div class="photoarticle">
                     
                     <div class="photo2 active" id="photo0">
-                        <img id="image1" src="<?php echo $affichearticle['image1_articles']; ?>"
-                        alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
+                        <img id="image1" src="<?php echo $affichearticle['url_images']; ?>"
+                        alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                         <div class="photo2" id="photo22">
-                            <img src="<?php echo $affichearticle['image2_articles']; ?>"
-                            alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
+                             <img src="<?php echo $affichearticle['url_images']; ?>"
+                                alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                             <div class="photo2" id="photo33">
-                                <img src="<?php echo $affichearticle['image3_articles']; ?>"
-                                alt="<?php echo $affichearticle['nom_articles']; ?>"></div>
+                                 <img src="<?php echo $affichearticle['url_images']; ?>"
+                                     alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                             </div>
                             
                             <div class="detailarticle">
                                 
-                                <?php
+                        
 
-
-$sqldetail2 = "SELECT *  FROM tailles";
-$requetedetail2= $db->prepare($sqldetail2);
-$requetedetail2->execute();
-       
-        ?>
 
 <div class="favorisb"></div>
 
@@ -90,46 +83,7 @@ $requetedetail2->execute();
     <div class="detail1 ">
         <div class="titre2"><?php echo $affichearticle['nom_articles']; ?> </div>
         <div class="titre2 favorisa">
-            <?php
-
-if (isset($_SESSION['id']))
-{
-
-$id_login = $_SESSION['id'];
-
-    $sqlfavoris = "SELECT COUNT(*) AS nombres FROM favoris
-    WHERE  id_utilisateurs = :id_utilisateur
-    AND id_articles = :id_article";
-    $requetefavoris = $db->prepare($sqlfavoris);
-    $requetefavoris->execute(array(
-        ":id_utilisateur" => $id_login,
-        ":id_article" => $_GET['id_article']    
-    ));
-    $affichefavoris = $requetefavoris->fetch();
-    
-    if ($affichefavoris['nombres'] <= 0) {
-        ?>
-        <input type="hidden" value="1" id="favoris">
-        <button type="submit">
-            <i class="fa-regular fa-heart"></i>
-        </button>
-    </form>
-    <?php
-    }
-    if ($affichefavoris['nombres'] >= 1) {        
-        ?>
-        <input type="hidden" value="1" id="favoris">
-        <button type="submit">
-            <i class="fa-solid fa-heart"></i>
-        </button>
-    </form>
-    <?php
-    }
-}else{}
-    ?>
-
-
-
+     
 
 </div>
 </div>
@@ -138,7 +92,8 @@ $id_login = $_SESSION['id'];
         <div class="titre2">Taille : </div>
         
         <div class="titre2" id="afficher">
-        <div class="titre2"><?php echo $affichearticle['prix_articles']; ?> €</div>
+        <div class="titre2"><?php echo $affichearticle['hauteur_articles']; ?> €</div>
+        <div class="titre2"><?php echo $affichearticle['largeur_articles']; ?> €</div>
 
 </div>
 </div>
@@ -149,7 +104,7 @@ $id_login = $_SESSION['id'];
 <div class="detail1">
     <div class="titre2">Quantite : </div>
     <div class="titre2 afficher"></div>
-    <div class="titre2"><?php echo $affiches['quantite_stock']; ?></div>
+    <div class="titre2"><?php echo $affiches['quantite_articles']; ?></div>
 
 
 

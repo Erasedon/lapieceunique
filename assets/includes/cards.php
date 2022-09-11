@@ -4,8 +4,8 @@ include('../db/connectdb.php');
 if(isset($_GET["action"]))
 {
 	$query = "
-	SELECT * FROM articles a, genres g, categories c, sous_categories sc 
-	WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories 
+	SELECT * FROM articles a, genres g,images i, categories c, sous_categories sc 
+	WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories AND  a.id_articles = i.id_articles
 	";
 	if(isset($_GET["minimum_price"], $_GET["maximum_price"]) && !empty($_GET["minimum_price"]) && !empty($_GET["maximum_price"]))
 	{
@@ -93,8 +93,8 @@ if(isset($_GET["action"]))
 	
 	';	
 		$output .= '<div class="col-sm-2 col-lg-8 col-md-3">
-		<ul class="pagination">
-		<li class="page-item "><button class="page pag_selector " data-page="precedent">Precedent</button></li>';
+		<ul class="pagination justify-content-center">
+			<li class="page-item "><button class="page pag_selector " data-page="precedent">Precedent</button></li>';
 
 			for($i=1;$nombre_page >= $i ;$i++)
 			{
