@@ -86,6 +86,10 @@ $affichearticle = $requetearticle->fetch();
      
 
 </div>
+<div class="detail1">
+    <div class="titre2">Code barre : </div>
+    <div class="titre2"><?php echo $affichearticle['cbp_articles']; ?> </div>
+</div>
 </div>
 <form method="POST" class="formpanier">
     <div class="detail1">
@@ -121,15 +125,22 @@ $affichearticle = $requetearticle->fetch();
 <!-- bouton achat  -->
 <div class="placementbout">
 <input type="hidden"  name="retour">
-    <button type="submit" class="boutonajoutpanier">
-        <a style="text-decoration: none" href="index.php" ><i class='fa-solid fa-bag-shopping'></i> Retour </a>
-    </button>
+    <a style="text-decoration: none" href="index.php" > <button type="button" class="boutonajoutpanier">
+       Retour 
+    </button></a>
                     </form>
-
-<input type="hidden"  name="modifier">
-    <button type="submit" class="boutonajoutpanier">
-        <a style="text-decoration: none" href="ajoutposter.php?id_article=<?php echo $id_articles;?>" ><i class='fa-solid fa-bag-shopping'></i> Modifier </a>
-    </button>
+                    <?php
+                     
+                     if(isset($_SESSION['role']) > 0 ){
+                  
+                        ?>
+                        <input type="hidden"  name="modifier">
+                        <a style="text-decoration: none" href="ajoutposter.php?id_article=<?php echo $id_articles;?>" > <button type="button" class="boutonajoutpanier">
+                        Modifier 
+                        </button></a>
+                    <?php 
+                    }
+                    ?>
                   
 </div>
 <!-- 

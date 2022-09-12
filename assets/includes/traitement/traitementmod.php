@@ -56,6 +56,7 @@ if(isset( $_POST['nomap']) && isset( $_POST['Prixap'])&& isset( $_POST['hauteura
             ));
          
 
+        
         $sql = "SELECT * FROM articles WHERE nom_articles = :nom_articles";
     $prepare = $db->prepare($sql);   
     $prepare ->execute(array(':nom_articles' => $nomap));    
@@ -65,41 +66,59 @@ if(isset( $_POST['nomap']) && isset( $_POST['Prixap'])&& isset( $_POST['hauteura
    
       while($result = $prepare->fetch()) {
         if($nomap == $result['nom_articles']){
-      //             if(isset($_FILES['file'])){
-      //               $tmpName = $_FILES['file']['tmp_name'];
-      //               $name = $_FILES['file']['name'];
-      //               $size = $_FILES['file']['size'];
-      //               $error = $_FILES['file']['error'];
+                  if(isset($_FILES['file'])){
+                  
+                    $tmpName = $_FILES['file']['tmp_name'];
+                    $name = $_FILES['file']['name'];
+                    $size = $_FILES['file']['size'];
+                    $error = $_FILES['file']['error'];
                 
-      //               $tabExtension = explode('.', $name);
-      //               $extension = strtolower(end($tabExtension));
+                    $tabExtension = explode('.', $name);
+                    $extension = strtolower(end($tabExtension));
                 
-      //               $extensions = ['jpg', 'png', 'jpeg', 'gif'];
-      //               $maxSize = 400000;
+                    $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+                    $maxSize = 400000;
                 
-      //               if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+                    if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
                 
-      //                   $uniqueName = uniqid('', true);
-      //                   //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
-      //                   $file = $uniqueName.".".$extension;
-      //                   //$file = 5f586bf96dcd38.73540086.jpg
-                
-      //                   move_uploaded_file($tmpName, '../assets/uploads/'.$file);
-                
-      //                   $sql = "INSERT INTO images (nom_images,url_images, id_articles) VALUES (:nom_images, :url_images,:id_articles )"; 
-      //                   $prepare = $db->prepare($sql);   
-      //                   $prepare ->execute(array(':nom_images'=>$name, ':url_images' => $file,':id_articles' => $result['id_articles'] ));
-                
-                         header("Location:../../../poster.php?id_article=".$result['id_articles']."");
+                        $uniqueName = uniqid('', true);
+                        //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
+                        $file = $uniqueName.".".$extension;
+                        //$file = 5f586bf96dcd38.73540086.jpg
+                       
+                        move_uploaded_file($tmpName, '../../uploads/'.$file);
+
+                 $sql = "SELECT * FROM images WHERE id_articles = :id_articles";
+              $prepare = $db->prepare($sql);   
+              $prepare ->execute(array(':id_articles' => $result['id_articles']));
+              $result = $prepare->fetch();
+              $count = $prepare->rowCount();
+              $chemin="assets/uploads/".$file;
+
+              if($count == 1) {
+                $sql = "UPDATE images SET nom_images=:nom_images, url_images=:url_images , id_articles=:id_articles WHERE id_articles= :id_articles";
+                $prepare = $db->prepare($sql);   
+                $prepare ->execute(array(':nom_images'=>$name, 
+                ':url_images' => $chemin, 
+                ':id_articles' => $result['id_articles']
+                    ));
+              
+                    header("Location:../../../poster.php?id_article=".$result['id_articles']."");
+              }else{
+                $sql = "INSERT INTO images (nom_images,url_images, id_articles) VALUES (:nom_images, :url_images,:id_articles )"; 
+                $prepare = $db->prepare($sql);   
+                        $prepare ->execute(array(':nom_images'=>$name, ':url_images' => $chemin,':id_articles' => $result['id_articles'] ));
+                          
+                          header("Location:../../../poster.php?id_article=".$result['id_articles']."");
+              }
                     
                     }
                     else{
-                      header("Location:../crud.php?id=erreuru");
+                      header("Location:../../../poster.php?id_article=".$result['id_articles']."");
                     }
-                
-         }
+          }
+        }
       }
-    // }
-    // }
+    }
   }
 }   

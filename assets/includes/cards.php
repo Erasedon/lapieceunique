@@ -67,7 +67,7 @@ if(isset($_GET["action"]))
 			<div class="col-lg-4">
 				<div class="categorie">
 				<div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px;">
-					<img src="'. $row['image1_articles'] .'" alt="" class="figure-img img-fluid rounded" >
+					<img src="'. $row['url_images'] .'" alt="" class="figure-img img-fluid rounded" >
 					<p align="center"><strong><a href="poster.php?id_article= '.$row['id_articles'].'">'. $row['nom_articles'] . '</a></strong></p>
 						<h4 style="text-align:center;" class="text-danger" >' . $row['prix_articles'] . '€</h4>
 						<p>

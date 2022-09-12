@@ -3,7 +3,8 @@
 
 if ((!empty($_GET['id_article'])))
 {
-    $sql = "SELECT * FROM articles a, genres g, categories c, sous_categories sc WHERE id_articles = :id_articles";
+    $sql = "SELECT * FROM articles a, genres g,images i, categories c, sous_categories sc 
+	WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories AND  a.id_articles = i.id_articles and a.id_articles = :id_articles";
     $prepare = $db->prepare($sql);   
     $prepare ->execute(array(':id_articles' => $_GET['id_article']));
     $result = $prepare->fetch();
@@ -33,7 +34,7 @@ if ((!empty($_GET['id_article'])))
 
         <div class="error"></div>
 
-        <form method="post" action="assets/includes/traitement/traitementmod.php?id_articles=<?php echo $result['id_articles'] ?>" id="formajax">
+        <form method="post" action="assets/includes/traitement/traitementmod.php?id_articles=<?php echo $result['id_articles'] ?>" id="formajax" enctype="multipart/form-data">
             <div class="model_deux">
                 <label for="">Nom du Produit:</label>
                 <input type="text" name="nomap" value="<?php echo $result['nom_articles'] ?>" required>
@@ -59,6 +60,13 @@ if ((!empty($_GET['id_article'])))
             <div class="model_deux">
                 <label for="">Quantité :</label>
                 <input type="text" name="Quantite" value="<?php echo $result['quantite_articles'] ?>" required>
+            </div>
+            <div class="model_deux">
+                <label for="">photo du produit :</label>
+                <img style="max-width:200px" src="<?php echo $result['url_images']; ?>">
+            </div>
+            <div class="model_deux">
+                <input type="file" name="file" >
             </div>
             <div class="row g-3">
             <div class="col-md">
@@ -163,10 +171,11 @@ if ((!empty($_GET['id_article'])))
                
             </div>
             <input type="submit" class="sub" value="Enregistrer">
-            <button type="submit" class="sub">
-                <a style="text-decoration: none" href="poster.php?id_article=<?php echo $result['id_articles'] ?>"><i
-                        class='fa-solid fa-bag-shopping'></i> Retour </a>
+              <a style="text-decoration: none" href="poster.php?id_article=<?php echo $result['id_articles'] ?>">
+              <button type="button" class="sub">
+               Retour 
             </button>
+            </a>
         </form>
     </div>
 </div>
@@ -195,7 +204,7 @@ if ((!empty($_GET['id_article'])))
 
         <div class="error"></div>
 
-        <form method="post" action="assets/includes/traitement/traitementajout.php" id="formajax">
+        <form method="post" action="assets/includes/traitement/traitementajout.php" id="formajax" enctype="multipart/form-data">
             <div class="model_deux">
                 <label for="">Nom du Produit:</label>
                 <input type="text" name="nomap" required>
@@ -221,7 +230,10 @@ if ((!empty($_GET['id_article'])))
                 <label for="">Quantité :</label>
                 <input type="text" name="Quantite" required>
             </div>
-
+            <div class="model_deux">
+                <label for="">photo du produit :</label>
+                 <input type="file" name="file" >
+            </div>
             <div class="row g-2">
                 <div class="col-md">
                     <div class="form-floating">
@@ -275,13 +287,24 @@ if ((!empty($_GET['id_article'])))
                 <div class="nom">
                     <label for="">Code barre :</label>
                     <!-- <input type="file" name="cbpap" required> -->
-                    <input type="file" name="file"  class="form-control" id="file_browser">
-                </div>
+                <a class="sub" id="startButton">Start</a>
+                <a class="sub" id="resetButton">Reset</a>
+            </div>
+			</div> 
+             <div id="sourceSelectPanel" style="display:none">
+                <label for="sourceSelect">Change video source:</label>
+                <select id="sourceSelect" style="max-width:400px">
+                </select>
+            </div>
+            <div>
+                <video id="video" class="model_deux" style="border: 1px solid gray ;"></video>
+            </div>
+
+          
                 <div class="prenom">
                     <label for="">Code barre :</label>
-                    <input type="text" name="barretxtap" required>
+                    <input type="text"id="result" name="barretxtap" required>
                 </div>
-            </div>
 
 
             <div class="model_deux">

@@ -7,7 +7,7 @@
 
         <div class="error"></div>
 
-        <form method="post" action="assets/includes/traitement/traitementoc.php" id="formajax">
+        <form method="post" action="assets/includes/traitement/traitementoc.php" id="formajax" enctype="multipart/form-data">
             <div class="model_un">
                 <div class="nom">
                     <label for="">Nom :</label>
@@ -52,15 +52,28 @@
                 </div>
             </div>
             <div class="model_un">
-                <!-- <div class="nom">
-                    <label for="">Code barre photo :</label>
-                      <input type="file" name="cbpfo" required>
-                </div> -->
+                <div class="nom">
+                    <label for="">Code barre :</label>
+                    <!-- <input type="file" name="cbpap" required> -->
+                <a class="sub" id="startButton">Start</a>
+                <a class="sub" id="resetButton">Reset</a>
+            </div>
+			</div> 
+             <div id="sourceSelectPanel" style="display:none">
+                <label for="sourceSelect">Change video source:</label>
+                <select id="sourceSelect" style="max-width:400px">
+                </select>
+            </div>
+            <div>
+                <video id="video" class="model_deux" style="border: 1px solid gray ;"></video>
+            </div>
+
+          
                 <div class="prenom">
                     <label for="">Code barre :</label>
-                    <input type="text" name="barretxtfo" required>
-                </div>  
-            </div>
+                    <input type="text"id="result" name="barretxtap" required>
+                </div>
+
             <div class="model_deux">
                 <label for="">quantité :</label>
                 <input type="text" name="quantité" required>
@@ -92,7 +105,7 @@
 
         <div class="error"></div>
 
-        <form method="post" action="assets/includes/traitement/traitementoc.php" id="formajax">
+        <form method="post" action="assets/includes/traitement/traitementoc.php" id="formajax" enctype="multipart/form-data">
             <div class="model_un">
                 <div class="nom">
                     <label for="">Nom :</label>
@@ -137,15 +150,28 @@
                 </div>
             </div>
             <div class="model_un">
-                <!-- <div class="nom">
-                    <label for="">Code barre photo :</label>
-                      <input type="file" name="cbpfo" required>
-                </div> -->
+                <div class="nom">
+                    <label for="">Code barre :</label>
+                    <!-- <input type="file" name="cbpap" required> -->
+                <a class="sub" id="startButton">Start</a>
+                <a class="sub" id="resetButton">Reset</a>
+            </div>
+			</div> 
+             <div id="sourceSelectPanel" style="display:none">
+                <label for="sourceSelect">Change video source:</label>
+                <select id="sourceSelect" style="max-width:400px">
+                </select>
+            </div>
+            <div>
+                <video id="video" class="model_deux" style="border: 1px solid gray ;"></video>
+            </div>
+
+          
                 <div class="prenom">
                     <label for="">Code barre :</label>
-                    <input type="text" name="barretxtfo" required>
-                </div>  
-            </div>
+                    <input type="text"id="result" name="barretxtap" required>
+                </div>
+
             <div class="model_deux">
                 <label for="">quantité :</label>
                 <input type="text" name="quantité" required>
