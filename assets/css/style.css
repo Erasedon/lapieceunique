@@ -131,6 +131,9 @@
     #nav-links li a {
         padding: .5rem 1rem;
     }
+    #testres{
+        display: none;
+    }
 }
 
 /* animation burger */
@@ -181,7 +184,7 @@
     width: 100%;
     margin-top: 80px;
     line-height: 35px;
-    
+    padding-right: 5em;
   }
   .button-filtre {
     width: 90px;

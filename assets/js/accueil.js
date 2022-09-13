@@ -8,22 +8,22 @@
 
         // // rechercher une valeur dans un url
 
-        function getParameterByName(name, url) {
+        function getParameterByName(name, currentURL) {
             name = name.replace(/[\[\]]/g, '\\$&'); // regex qui traite la chaine
             var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
+                results = regex.exec(currentURL);
             if (!results) return null;
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
 
-        var page = (getParameterByName('page') == null) ? 1  : getParameterByName('page');
-        var limit = (getParameterByName('limit') == null) ? 5 : getParameterByName('limit');
+        var page=(getParameterByName('page')== null) ? 1 :getParameterByName('page');
+        var limit =(getParameterByName('limit')== null) ? 5 :getParameterByName('limit');
           
 
         filter_data(page, limit);
 
-        function filter_data(page=(url.searchParams.get('page')== null) ? 1  :url.searchParams.get('page') , limit=(url.searchParams.get('limit')== null) ? 5  :url.searchParams.get('limit') ) {
+        function filter_data(page = 1, limit = 5) {
 
             $('.filter_data').html('<div id="loading" style="" ></div>');
             var action = 'fetch_data';
@@ -34,7 +34,9 @@
             var ram = get_filter('ram');
             var storage = get_filter('storage');
 
+           
 
+            
             var datas = {}
 
             if (action = !null) {
@@ -99,7 +101,9 @@
         
         // onclick des checkbox du filtre 
         $('.common_selector').on('click', function() {
-            filter_data();
+            page =(url.searchParams.get('page')== null) ?  1 :url.searchParams.get('page');
+            limit=(url.searchParams.get('limit')== null) ? 5 :url.searchParams.get('limit');
+            filter_data(page,limit);
         });
 
         // onclick de la pagination des posters 
@@ -109,8 +113,10 @@
             function(e) {
                 const page = $(e.target).data('page');
                 url.searchParams.set('page', page);
+                limitbase = 5;
+                const limit =(url.searchParams.get('limit')== null) ?  url.searchParams.set('limit', limitbase) :url.searchParams.get('limit');
                 history.pushState({}, '', url);
-                // var limit =url.searchParams.get('limit');
+          
                 filter_data(page, limit);
 
             });
@@ -118,10 +124,10 @@
         //onclick de la limite de nombre de posters afficher 
         $('.filter_data').on('click', '.limit_selector', function(e) {
             const limit = $(e.target).data('limit');
-            
+            pagebase = 1;
             url.searchParams.set('limit', limit);
+            const page =(url.searchParams.get('page')== null) ?  url.searchParams.set('page', pagebase):url.searchParams.get('page');
             history.pushState({}, '', url);
-            // var page =url.searchParams.get('page');
             filter_data(page, limit);
         });
 

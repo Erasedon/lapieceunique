@@ -31,9 +31,9 @@ if(isset( $_POST['nomap']) && isset( $_POST['Prixap'])&& isset( $_POST['hauteura
       }
     }
     if($count == 0){ 
-        $sql = "INSERT INTO articles ( nom_articles , description_articles , prix_articles ,cbp_articles ,hauteur_articles ,largeur_articles ,id_categories ,id_sous_categories ,id_genres) VALUES (:nom_articles ,:descriptionap ,:prixap ,:cbp_articles ,:hauteur_articles ,:largeur_articles ,:id_categories ,:id_sous_categories ,:id_genres)"; 
+        $sql = "INSERT INTO articles (nom_articles, description_articles, prix_articles, cbp_articles, quantite_articles, hauteur_articles, largeur_articles, id_categories, id_genres, id_sous_categories, id_occasion) VALUES (:nom_articles, :description_articles, :prixap, :cbp_articles, :quantite_articles, :hauteur_articles, :largeur_articles, :id_categories, :id_genres, :id_sous_categories, :id_occasion)"; 
         $prepare = $db->prepare($sql);   
-        $prepare ->execute(array(':nom_articles'=>$nomap, ':descriptionap' => $descriptionap, ':prixap' => $Prixap ,':cbp_articles' => $barretxtap ,':hauteur_articles'=>$hauteurap ,':largeur_articles'=>$largeurap ,':id_categories'=>$selcat ,':id_sous_categories'=>$selsouscat ,':id_genres'=>$selgenres));
+        $prepare ->execute(array(':nom_articles'=>$nomap, ':description_articles' => $descriptionap, ':prixap' => $Prixap ,':cbp_articles' => $barretxtap ,':quantite_articles'=>$Quantite,':hauteur_articles'=>$hauteurap ,':largeur_articles'=>$largeurap ,':id_categories'=>$selcat ,':id_sous_categories'=>$selsouscat ,':id_genres'=>$selgenres,':id_occasion'=>0));
 
 
         $sql = "SELECT * FROM articles WHERE nom_articles = :nom_articles";
@@ -44,11 +44,36 @@ if(isset( $_POST['nomap']) && isset( $_POST['Prixap'])&& isset( $_POST['hauteura
     if ( $count == 1) {
       while($result = $prepare->fetch()) {
         if($nomap == $result['nom_articles']){
-          $sql = "INSERT INTO stocks (id_articles,quantite_stock) VALUES (:id_articles ,:quantite_stock)";        
-          $prepare = $db->prepare($sql);   
-          $prepare ->execute(array(':id_articles'=>$result['id_articles'], ':quantite_stock' => $Quantite));
+          if(isset($_FILES['file'])){
+                  
+            $tmpName = $_FILES['file']['tmp_name'];
+            $name = $_FILES['file']['name'];
+            $size = $_FILES['file']['size'];
+            $error = $_FILES['file']['error'];
+        
+            $tabExtension = explode('.', $name);
+            $extension = strtolower(end($tabExtension));
+        
+            $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+            $maxSize = 400000;
+        
+            if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+        
+                $uniqueName = uniqid('', true);
+                //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
+                $file = $uniqueName.".".$extension;
+                //$file = 5f586bf96dcd38.73540086.jpg
+               
+                move_uploaded_file($tmpName, '../../uploads/'.$file);
+                $sql = "INSERT INTO images (nom_images,url_images, id_articles) VALUES (:nom_images, :url_images,:id_articles)"; 
+                $prepare = $db->prepare($sql);   
+                        $prepare ->execute(array(':nom_images'=>$name, ':url_images' => $file,':id_articles' => $result['id_articles'] ));
+                                   
+            
+                header("Location:../../../poster.php?id_article= ".$result['id_articles']."");
+              }
+            }
   
-          header("Location:../../../poster.php?id_article= ".$result['id_articles']."");
         }
       }
     }

@@ -45,15 +45,15 @@ $affichearticle = $requetearticle->fetch();
           
           <div class="photogauche">
               <div class="photo" onclick="choixPhoto(0)" id="photo1">
-                <img src="<?php echo $affichearticle['url_images']; ?>"
+                <img src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
                 alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                 
                  <div class="photo" onclick="choixPhoto(1)" id="photo2">
-                    <img src="<?php echo $affichearticle['url_images']; ?>"
+                    <img src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
                 alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                     
                 <div class="photo" onclick="choixPhoto(2)" id="photo3">
-                      <img src="<?php echo $affichearticle['url_images']; ?>"
+                      <img src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
                 alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                 </div>
                 
@@ -62,13 +62,13 @@ $affichearticle = $requetearticle->fetch();
                 <div class="photoarticle">
                     
                     <div class="photo2 active" id="photo0">
-                        <img id="image1" src="<?php echo $affichearticle['url_images']; ?>"
+                        <img id="image1"src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
                         alt="<?php echo $affichearticle['nom_images']; ?>"></div>
-                        <div class="photo2" id="photo22">
-                             <img src="<?php echo $affichearticle['url_images']; ?>"
+                        <div class="photo2"  id="photo22">
+                             <img src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
                                 alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                             <div class="photo2" id="photo33">
-                                 <img src="<?php echo $affichearticle['url_images']; ?>"
+                                 <img src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
                                      alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                             </div>
                             
@@ -86,20 +86,22 @@ $affichearticle = $requetearticle->fetch();
      
 
 </div>
-<div class="detail1">
-    <div class="titre2">Code barre : </div>
-    <div class="titre2"><?php echo $affichearticle['cbp_articles']; ?> </div>
-</div>
-</div>
+
 <form method="POST" class="formpanier">
-    <div class="detail1">
-        <div class="titre2">Taille : </div>
-        
-        <div class="titre2" id="afficher">
-        <div class="titre2"><?php echo $affichearticle['hauteur_articles']; ?> €</div>
-        <div class="titre2"><?php echo $affichearticle['largeur_articles']; ?> €</div>
 
 </div>
+    <div class="detail1">Taille : </div>
+    <div class="detail1">
+    <div class="titre2">hauteur : </div> 
+    <div class="titre2 afficher"></div>
+           
+            <div class="titre2"><?php echo $affichearticle['hauteur_articles']; ?> cm</div>
+
+</div>   
+<div class="detail1">
+    <div class="titre2">largeur : </div>
+    <div class="titre2 afficher"></div>
+    <div class="titre2"><?php echo $affichearticle['largeur_articles']; ?> cm</div>
 </div>
 <div class="detail1">
     <div class="titre2">Prix : </div>
@@ -109,11 +111,12 @@ $affichearticle = $requetearticle->fetch();
     <div class="titre2">Quantite : </div>
     <div class="titre2 afficher"></div>
     <div class="titre2"><?php echo $affiches['quantite_articles']; ?></div>
-
-
-
 </div>
-
+<div class="detail1">
+    <div class="titre2">Code barre : </div>
+    <div class="titre2 afficher"></div>
+    <div class="titre2"><?php echo $affichearticle['cbp_articles']; ?> </div>
+</div>
 <div class="detail2">
     <div class="titre3">Description de l'article :</div>
     <div class="titre4"></div>
