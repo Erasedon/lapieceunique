@@ -2,13 +2,92 @@
 
 include 'assets/db/connectdb.php';
 
+$sql = "SELECT * FROM articles a, genres g,images i, categories c, sous_categories sc 
+WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories AND  a.id_articles = i.id_articles ";
+$prepare = $db->prepare($sql);   
+$prepare ->execute();
+$result = $prepare->fetch();
+
+
+
+
+$reqgenres = "SELECT * FROM genres";
+$preparegenres = $db->prepare($reqgenres);   
+$preparegenres ->execute();
+$resultgenres = $preparegenres->fetchALL();
+
+$reqsouscat = "SELECT * FROM sous_categories";
+$preparesouscat = $db->prepare($reqsouscat);   
+$preparesouscat ->execute();
+$resultsouscat = $preparesouscat->fetchALL();
+
+$reqcat = "SELECT * FROM categories";
+$preparecat = $db->prepare($reqcat);   
+$preparecat ->execute();
+$resultcat = $preparecat->fetchALL();
 ?>
+<div id="filtretel">
+<div class="row g-3">
+            <div class="col-md">
+                    <div class="form-floating">
+                        <select id="brandresp" name="selgenres"  class="form-select" id="floatingSelectGrid">
+                            <option >liste des genres</option>
+                            <?php
+                            
+                           
+                            foreach ($resultgenres as $row) {
+                                                            
+                                ?>
+                                <option value="<?php echo $row['id_genres'] ?>"><?php echo $row['nom_genres'] ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                        <label for="floatingSelectGrid">liste des genres</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating">
+                        <select id="ramresp" name="selcat" class="form-select" id="floatingSelectGrid">
+                           
+                            <option >liste des categories</option>
+                            <?php
+                            foreach ($resultcat as $row) {
+                                                               ?>
+                                                                    
+                                <option value="<?php echo $row['id_categories'] ?>"><?php echo $row['nom_categories'] ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                        <label for="floatingSelectGrid">listes des categories</label>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating">
+                        <select id="storageresp" name="selsouscat" class="form-select" id="floatingSelectGrid">
+                            <option >liste des sous_categories</option>
+                            <?php
+                         
+                            foreach ($resultsouscat as $row) {
+                               
+                                
+                                    ?>
+                                    
+                                <option value="<?php echo $row['id_sous_categories'] ?>"><?php echo $row['nom_sous_categories'] ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                        <label for="floatingSelectGrid">listes des sous_categories</label>
+                    </div>
+                </div>
+            </div> 
 
+</div>
 <div class="container-fluid">
-
-
-    <div class="container-filtre-tb col-6 col-lg-4">
-        <div id="testres">
+     <div class="container-filtre-tb col-6 col-lg-4">
+        <div id="filtredesktop">
             <!-- filtre -->
             <div class="filtre">
 

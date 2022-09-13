@@ -69,7 +69,6 @@ if(isset( $_POST['nomap']) && isset( $_POST['Prixap'])&& isset( $_POST['hauteura
                 $prepare = $db->prepare($sql);   
                         $prepare ->execute(array(':nom_images'=>$name, ':url_images' => $file,':id_articles' => $result['id_articles'] ));
                                    
-            
                 header("Location:../../../poster.php?id_article= ".$result['id_articles']."");
               }
             }

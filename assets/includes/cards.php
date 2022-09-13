@@ -56,6 +56,7 @@ if(isset($_GET["action"]))
 		$total_row = $statement->rowCount();
 	}
 
+
 	$output = '';
 		
 	if($total_pag > 0)
@@ -63,7 +64,7 @@ if(isset($_GET["action"]))
 		foreach($result as $row)
 		{
 			$output .= '
-			<div class="col-3 text-center">
+			<div class="col-8 col-sm-4 text-center">
 				<div class="card " style="width: 18rem;">
 						<img src="'. $row['url_images'] .'" class="rounded mx-auto d-block card-img-top " alt="...">
 					<div class="card-body">
@@ -90,7 +91,8 @@ if(isset($_GET["action"]))
 				<button class ="limit_selector " data-limit="20">20</button>    
 			</div>
 	';	
-	$precedent =$_GET['page']-1;
+		
+		$precedent =$_GET['page']-1;
 		$suivant = $_GET['page']+1;
 		if($precedent>0){
 			$precedent = $_GET['page']-1;
@@ -109,9 +111,12 @@ if(isset($_GET["action"]))
 
 		for($i=1;$nombre_page >= $i ;$i++)
 		{
+			if($i == ($_GET['page']-1)or $i == ($_GET['page']-2)or $i == ($_GET['page']-3) or $i == ($_GET['page']+1)or $i == ($_GET['page']+2)or $i == ($_GET['page']+3)or $i == $_GET['page'] ){
+
 				$output .= '
-					<li class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
+				<li style="display=none;"class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
 				';
+			}
 		}
 	$output.='
 			<li class="page-item "><button class="page pag_selector " data-page="'. $suivant.'">Suivant</button></li>
@@ -126,9 +131,12 @@ if(isset($_GET["action"]))
 		
 		for($i=1;$nombre_page >= $i ;$i++)
 		{
-			$output .= '
-			<li class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
-			';
+			if($i == ($_GET['page']-1)or $i == ($_GET['page']-2)or $i == ($_GET['page']-3) or $i == ($_GET['page']+1)or $i == ($_GET['page']+2)or $i == ($_GET['page']+3)or $i == $_GET['page'] ){
+
+				$output .= '
+				<li style="display=none;"class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
+				';
+			}
 		}
 		$output.='
 		<li class="page-item "><button class="page pag_selector " data-page="1">Suivant</button></li>

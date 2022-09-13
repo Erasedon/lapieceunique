@@ -4,8 +4,6 @@
 
         var currentURL = document.URL;
 
-        const url = new URL(window.location);
-
         // // rechercher une valeur dans un url
 
         function getParameterByName(name, currentURL) {
@@ -19,50 +17,39 @@
 
         var page=(getParameterByName('page')== null) ? 1 :getParameterByName('page');
         var limit =(getParameterByName('limit')== null) ? 5 :getParameterByName('limit');
-          
+       
+        
+        const url = new URL(window.location);
 
         filter_data(page, limit);
 
-        function filter_data(page = 1, limit = 5) {
-
+        function filter_data(page = 1, limit = 5, brandresp,ramresp,storageresp) {
+          
             $('.filter_data').html('<div id="loading" style="" ></div>');
             var action = 'fetch_data';
             var minimum_price = $('#hidden_minimum_price').val();
             var maximum_price = $('#hidden_maximum_price').val();
-         
             var brand = get_filter('brand');
             var ram = get_filter('ram');
             var storage = get_filter('storage');
-
+            var datas = {}
+            var brandresp;
+            var ramresp;
+            var storageresp;
            
 
-            
-            var datas = {}
-
-            if (action = !null) {
-                datas.action = action;
-            }
-            if (limit != null) {
-                datas.limit = limit;
-            }
-            if (page != null) {
-                datas.page = page;
-            }
-            if (minimum_price != "") {
-                datas.minimum_price = minimum_price;
-            }
-            if (maximum_price != "") {
-                datas.maximum_price = maximum_price;
-            }
-            if (brand != "") {
-                datas.brand = brand;
-            }
-            if (ram != "") {
-                datas.ram = ram;
-            }
-            if (storage != "") {
-                datas.storage = storage;
-            }
+           
+            if (action = !null) { datas.action = action;}
+            if (limit != null) { datas.limit = limit; }
+            if (page != null) {  datas.page = page; }
+            if (minimum_price != "") { datas.minimum_price = minimum_price;  }
+            if (maximum_price != "") { datas.maximum_price = maximum_price;}
+            if (brand != "") { datas.brand = brand;}
+            if (brandresp != "") { datas.brand = brandresp;}
+            if (ramresp != "") { datas.ram = ramresp;}
+            if (storageresp != "") { datas.storage = storageresp;}
+            if (ram != "") {datas.ram = ram; }
+            if (storage != "") { datas.storage = storage; }
 
             $.ajax({
                 url: "assets/includes/cards.php",
@@ -72,7 +59,6 @@
                     $('.filter_data').html(data);
                 }
             });
-
         }
 
         // recuperer la valeur des checkbox 
@@ -98,7 +84,20 @@
             // on retourne le tableau sous la forme  d'une chaine de caractere 
             return filter.toString();
         }
-        
+
+          $('#brandresp').on('change', function() {
+            brandresp = document.getElementById('brandresp').value;
+              filter_data(page,limit,brandresp);
+            });  
+            $('#ramresp').on('change', function() {
+                ramresp= document.getElementById('ramresp').value;
+                  filter_data(page,limit,brandresp,ramresp);
+                }); 
+             $('#storageresp').on('change', function() {
+                storageresp = document.getElementById('storageresp').value;
+                      filter_data(page,limit,brandresp,ramresp,storageresp);
+                    });
+          
         // onclick des checkbox du filtre 
         $('.common_selector').on('click', function() {
             page =(url.searchParams.get('page')== null) ?  1 :url.searchParams.get('page');
@@ -106,6 +105,7 @@
             filter_data(page,limit);
         });
 
+       
         // onclick de la pagination des posters 
         $('.filter_data').on(
             'click',

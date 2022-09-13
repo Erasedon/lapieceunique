@@ -34,7 +34,7 @@
                     <input type="text" id="result" name="cb">
                 </div>
             </div>
-            <input type="submit" class="sub" value="Valider">
+            <input type="submit" class="btn-secondary" value="Valider">
         </form>
     </div>
 </div>

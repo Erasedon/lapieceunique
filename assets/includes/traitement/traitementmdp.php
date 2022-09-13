@@ -59,7 +59,7 @@
                     // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
                     $headers[] = 'MIME-Version: 1.0';
                     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-                    $headers[] = 'From: "Metropolis Simplon" <yanis.pirlet@gmail.com> ';
+                    $headers[] = 'From: "La pieceunique" <yanis.pirlet@gmail.com> ';
                     // En-têtes additionnels
                 
                     mail($to, $subject, $message, implode("\r\n", $headers));

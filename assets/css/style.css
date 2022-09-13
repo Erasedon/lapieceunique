@@ -131,7 +131,7 @@
     #nav-links li a {
         padding: .5rem 1rem;
     }
-    #testres{
+    #filtredesktop{
         display: none;
     }
 }
@@ -706,11 +706,5 @@ form {
     padding: 9px;
     color: #333;
 }
-#loading
-{
 
-	text-align:center; 
-	background: url('../img/loader.gif') no-repeat center; 
-	height: 550px;
-}
 
