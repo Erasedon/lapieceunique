@@ -65,9 +65,10 @@ if(isset( $_POST['nomap']) && isset( $_POST['Prixap'])&& isset( $_POST['hauteura
                 //$file = 5f586bf96dcd38.73540086.jpg
                
                 move_uploaded_file($tmpName, '../../uploads/'.$file);
+                $chemin="assets/uploads/".$file;
                 $sql = "INSERT INTO images (nom_images,url_images, id_articles) VALUES (:nom_images, :url_images,:id_articles)"; 
                 $prepare = $db->prepare($sql);   
-                        $prepare ->execute(array(':nom_images'=>$name, ':url_images' => $file,':id_articles' => $result['id_articles'] ));
+                        $prepare ->execute(array(':nom_images'=>$name, ':url_images' => $chemin,':id_articles' => $result['id_articles'] ));
                                    
                 header("Location:../../../poster.php?id_article= ".$result['id_articles']."");
               }

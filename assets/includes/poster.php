@@ -45,15 +45,15 @@ $affichearticle = $requetearticle->fetch();
           
           <div class="photogauche">
               <div class="photo" onclick="choixPhoto(0)" id="photo1">
-                <img src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
+                <img src="<?php echo $affichearticle['url_images']; ?>"
                 alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                 
                  <div class="photo" onclick="choixPhoto(1)" id="photo2">
-                    <img src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
+                    <img src="<?php echo $affichearticle['url_images']; ?>"
                 alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                     
                 <div class="photo" onclick="choixPhoto(2)" id="photo3">
-                      <img src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
+                      <img src="<?php echo $affichearticle['url_images']; ?>"
                 alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                 </div>
                 
@@ -62,13 +62,13 @@ $affichearticle = $requetearticle->fetch();
                 <div class="photoarticle">
                     
                     <div class="photo2 active" id="photo0">
-                        <img id="image1"src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
+                        <img id="image1"src="<?php echo $affichearticle['url_images']; ?>"
                         alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                         <div class="photo2"  id="photo22">
-                             <img src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
+                             <img src="<?php echo $affichearticle['url_images']; ?>"
                                 alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                             <div class="photo2" id="photo33">
-                                 <img src="assets/uploads/<?php echo $affichearticle['url_images']; ?>"
+                                 <img src="<?php echo $affichearticle['url_images']; ?>"
                                      alt="<?php echo $affichearticle['nom_images']; ?>"></div>
                             </div>
                             

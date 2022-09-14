@@ -98,7 +98,6 @@ $resultcat = $preparecat->fetchALL();
                             <hr>
                             <div>
                                 <?php
-
                             $query = "SELECT * FROM genres ORDER BY id_genres";
                             $statement = $db->prepare($query);
                             $statement->execute();
@@ -107,9 +106,7 @@ $resultcat = $preparecat->fetchALL();
                             ?>
                                 <div class="list-group-item checkbox">
                                     <i class="fa-regular fa-barcode-read fa-3x"></i>
-                                    <label><input type="checkbox" class="common_selector brand"
-                                            value="<?php echo $row['id_genres']; ?>">
-                                        <?php echo $row['nom_genres']; ?></label>
+                                    <label><input type="checkbox" class="common_selector brand" value="<?php echo $row['id_genres']; ?>"><?php echo $row['nom_genres']; ?></label>
                                 </div>
                                 <?php
                             }

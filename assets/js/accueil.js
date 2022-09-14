@@ -36,7 +36,7 @@
             var brandresp;
             var ramresp;
             var storageresp;
-           
+           console.log(brand);
 
            
             if (action = !null) { datas.action = action;}
@@ -45,9 +45,9 @@
             if (minimum_price != "") { datas.minimum_price = minimum_price;  }
             if (maximum_price != "") { datas.maximum_price = maximum_price;}
             if (brand != "") { datas.brand = brand;}
-            if (brandresp != "") { datas.brand = brandresp;}
-            if (ramresp != "") { datas.ram = ramresp;}
-            if (storageresp != "") { datas.storage = storageresp;}
+            if (brandresp != null) { datas.brand = brandresp;}
+            if (ramresp != null) { datas.ram = ramresp;}
+            if (storageresp != null) { datas.storage = storageresp;}
             if (ram != "") {datas.ram = ram; }
             if (storage != "") { datas.storage = storage; }
 
@@ -77,7 +77,6 @@
                     filter.push($(this).val());
                 });
 
-                
                 url.searchParams.set(class_name, filter.toString());         
                 history.pushState({}, '', url);
             }
@@ -87,11 +86,11 @@
 
           $('#brandresp').on('change', function() {
             brandresp = document.getElementById('brandresp').value;
-              filter_data(page,limit,brandresp);
+              filter_data(page,limit,brandresp,ramresp,storageresp);
             });  
             $('#ramresp').on('change', function() {
                 ramresp= document.getElementById('ramresp').value;
-                  filter_data(page,limit,brandresp,ramresp);
+                  filter_data(page,limit,brandresp,ramresp,storageresp);
                 }); 
              $('#storageresp').on('change', function() {
                 storageresp = document.getElementById('storageresp').value;
@@ -100,9 +99,7 @@
           
         // onclick des checkbox du filtre 
         $('.common_selector').on('click', function() {
-            page =(url.searchParams.get('page')== null) ?  1 :url.searchParams.get('page');
-            limit=(url.searchParams.get('limit')== null) ? 5 :url.searchParams.get('limit');
-            filter_data(page,limit);
+            filter_data();
         });
 
        
