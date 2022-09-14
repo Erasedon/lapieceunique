@@ -34,7 +34,7 @@
             <input type="text" name="mail" class="titr_in">
 
             <label for="" class="titr_la">Mot de passe :</label>
-            <input type="text" name="mdp" class="titr_in">
+            <input type="password" name="mdp" class="titr_in">
 
             <div class="aide">
                 <div class="check"><input type="checkbox" class="checkbox"><label for="">Se souvenir de moi</label></div>

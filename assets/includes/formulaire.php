@@ -1,15 +1,16 @@
 <?php 
     include 'assets/db/connectdb.php';
+
+
+
+if ((!empty($_GET['id_occasion'])))
+{
 $sql = "SELECT * FROM articles a, occasion o
 WHERE a.id_occasion = o.id_occasion AND a.id_occasion = :id_occasion";
 $prepare = $db->prepare($sql);   
 $prepare ->execute(array(':id_occasion' => $_GET['id_occasion']));
 $result = $prepare->fetch();
 
-
-
-if ((!empty($_GET['id_occasion'])))
-{
 ?>
 <div class="container">
     <div class="inscription">

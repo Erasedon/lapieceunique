@@ -112,10 +112,16 @@ if(isset($_GET["action"]))
 		for($i=1;$nombre_page >= $i ;$i++)
 		{
 			if($i == ($_GET['page']-1)or $i == ($_GET['page']-2)or $i == ($_GET['page']-3) or $i == ($_GET['page']+1)or $i == ($_GET['page']+2)or $i == ($_GET['page']+3)or $i == $_GET['page'] ){
+				if($i == ($_GET['page'])){
+					$output .= '
+					<li class="page-item active"><button style="background-color: #09a9ff;color: #fff; " class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
+					';	
+				}else{
 
-				$output .= '
-				<li style="display=none;"class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
-				';
+					$output .= '
+					<li class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
+					';
+				}
 			}
 		}
 	$output.='
@@ -131,7 +137,7 @@ if(isset($_GET["action"]))
 		
 		for($i=1;$nombre_page >= $i ;$i++)
 		{
-			if($i == ($_GET['page']-1)or $i == ($_GET['page']-2)or $i == ($_GET['page']-3) or $i == ($_GET['page']+1)or $i == ($_GET['page']+2)or $i == ($_GET['page']+3)or $i == $_GET['page'] ){
+			if($i == ($_GET['page']-1)or $i == ($_GET['page']-2)or $i == ($_GET['page']-3) or $i == ($_GET['page']+1)or $i == ($_GET['page']+2)or $i == ($_GET['page']+3)){
 
 				$output .= '
 				<li style="display=none;"class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>

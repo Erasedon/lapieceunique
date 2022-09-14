@@ -14,7 +14,7 @@
                                 <li><a href="ajoutposter.php">Ajout poster</a></li>
                                 <li><a href="occasion.php">Occasion</a></li>
                                 <li><a href="scanner.php">Scanner </a></li>
-                                <li class="users"> <a href="deconnexion">Déconnexion</a></li>
+                                <li class="users"> <a href="Deconnexion">Déconnexion</a></li>
                                 
                         <?php
                              }else { ?>

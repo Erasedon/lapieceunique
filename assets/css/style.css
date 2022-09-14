@@ -6,7 +6,7 @@
       margin: 0;
       padding:0;
       overflow-x: hidden;
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Roboto', sans-serif;
     
   }
 
@@ -46,7 +46,7 @@
 
 #nav-links li {
     list-style: none;
-    font-size: 1.2rem;
+  
 }
 
 #nav-links li a {
@@ -95,7 +95,10 @@
     background-color: 10px;
     transition: .5s ease-in-out;
 }
-
+#filtretel
+    {
+        display: none; 
+    }
 @media (max-width: 600px) {
 
     #nav-logo {
@@ -133,6 +136,10 @@
     }
     #filtredesktop{
         display: none;
+    }
+    #filtretel
+    {
+        display: flex; 
     }
 }
 
