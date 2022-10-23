@@ -29,7 +29,7 @@ $resultcat = $preparecat->fetchALL();
             <div class="col-md">
                     <div class="form-floating">
                         <select id="brandresp" name="selgenres"  class="form-select" id="floatingSelectGrid">
-                            <option value="0">liste des genres</option>
+                            <option value="">liste des genres</option>
                             <?php
                             foreach ($resultgenres as $row) {
                                                             
@@ -46,7 +46,7 @@ $resultcat = $preparecat->fetchALL();
                     <div class="form-floating">
                         <select id="ramresp" name="selcat" class="form-select" id="floatingSelectGrid">
                            
-                            <option value="0">liste des categories</option>
+                            <option value="">liste des categories</option>
                             <?php
                             foreach ($resultcat as $row) {
                                                                ?>
@@ -62,7 +62,7 @@ $resultcat = $preparecat->fetchALL();
                 <div class="col-md">
                     <div class="form-floating">
                         <select id="storageresp" name="selsouscat" class="form-select" id="floatingSelectGrid">
-                            <option value="0">liste des sous_categories</option>
+                            <option value="">liste des sous_categories</option>
                             <?php
                          
                             foreach ($resultsouscat as $row) {

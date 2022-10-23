@@ -22,7 +22,9 @@
         const url = new URL(window.location);
 
         filter_data(page, limit);
-
+        var brandresp="";
+        var ramresp="";
+        var storageresp="";
         function filter_data(page = 1, limit = 5, brandresp,ramresp,storageresp) {
           
             $('.filter_data').html('<div id="loading" style="" ></div>');
@@ -33,10 +35,8 @@
             var ram = get_filter('ram');
             var storage = get_filter('storage');
             var datas = {}
-            var brandresp;
-            var ramresp;
-            var storageresp;
-           console.log(brand);
+         
+           console.log(brandresp);
 
            
             if (action = !null) { datas.action = action;}
@@ -45,9 +45,9 @@
             if (minimum_price != "") { datas.minimum_price = minimum_price;  }
             if (maximum_price != "") { datas.maximum_price = maximum_price;}
             if (brand != "") { datas.brand = brand;}
-            if (brandresp != null) { datas.brand = brandresp;}
-            if (ramresp != null) { datas.ram = ramresp;}
-            if (storageresp != null) { datas.storage = storageresp;}
+            if (brandresp != "") { datas.brand = brandresp;}
+            if (ramresp != "") { datas.ram = ramresp;}
+            if (storageresp != "") { datas.storage = storageresp;}
             if (ram != "") {datas.ram = ram; }
             if (storage != "") { datas.storage = storage; }
 
