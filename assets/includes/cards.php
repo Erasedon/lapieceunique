@@ -4,8 +4,8 @@ include('../db/connectdb.php');
 if(isset($_GET["action"]))
 {
 	$query = "
-	SELECT * FROM articles a, genres g, categories c, sous_categories sc 
-	WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories 
+	SELECT * FROM articles a, genres g,images i, categories c, sous_categories sc 
+	WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories AND  a.id_articles = i.id_articles
 	";
 	if(isset($_GET["minimum_price"], $_GET["maximum_price"]) && !empty($_GET["minimum_price"]) && !empty($_GET["maximum_price"]))
 	{
@@ -40,14 +40,12 @@ if(isset($_GET["action"]))
 	
 		$limit =$_GET["limit"];
 	
+		
 	$statement =$db->prepare($query);
 	$statement->execute();
 	$result = $statement->fetchAll();
 	$total_pag = $statement->rowCount();
 	$nombre_page = ceil($total_pag/$limit);
-	
-	
-	
 	if(isset($_GET["page"]))
 	{	
 		$valref = ($limit*$_GET['page'])-$limit; 
@@ -55,60 +53,103 @@ if(isset($_GET["action"]))
 		$statement =$db->prepare($query);
 		$statement->execute();
 		$result = $statement->fetchAll();
-		$total_row = $statement->rowCount();		
+		$total_row = $statement->rowCount();
 	}
-		
+
+
 	$output = '';
+		
 	if($total_pag > 0)
 	{
 		foreach($result as $row)
 		{
 			$output .= '
-			<div class="col-lg-4">
-				<div class="categorie">
-				<div style="border:1px solid #ccc; border-radius:5px; padding:16px; margin-bottom:16px;">
-					<img src="'. $row['image1_articles'] .'" alt="" class="figure-img img-fluid rounded" >
-					<p align="center"><strong><a href="poster.php?id_article= '.$row['id_articles'].'">'. $row['nom_articles'] . '</a></strong></p>
-						<h4 style="text-align:center;" class="text-danger" >' . $row['prix_articles'] . '€</h4>
-						<p>
+			<div class="col-8 col-sm-4 text-center">
+				<div class="card " style="width: 18rem;">
+						<img src="'. $row['url_images'] .'" class="rounded mx-auto d-block card-img-top " alt="...">
+					<div class="card-body">
+						<h5 class="card-title">'. $row['nom_articles'] . '</h5>
+						<h4 class="card-text" >' . $row['prix_articles'] . '€</h4>
+						<p class="card-text">
 							Genres : '. $row['nom_genres'] .' <br />
 							Categories : '. $row['nom_categories'] .' <br />
 							listes personnages : '. $row['nom_sous_categories'] .'
 						</p>
-				</div>
-				</div>
+						<a href="poster.php?id_article= '.$row['id_articles'].'" class="btn btn-secondary">voir plus</a>
+					</div>
+					</div>
 			</div>
 			';
 		}
 		$output.='
-		<div class="col-sm-2 col-lg-8 col-md-3 "> 
+		<div class=""> 
 			<div class="hint-text">le limitateur est à <b>'.$limit.'</b> sur <b>334</b> resultat </div>
 			<br>
 			<br>
 				<button class ="limit_selector " data-limit="5">5</button>    
 				<button class ="limit_selector " data-limit="10">10</button>    
 				<button class ="limit_selector " data-limit="20">20</button>    
-		</div>
-	</div>
-	
+			</div>
 	';	
-		$output .= '<div class="col-sm-2 col-lg-8 col-md-3">
-		<ul class="pagination">
-		<li class="page-item "><button class="page pag_selector " data-page="precedent">Precedent</button></li>';
+		
+		$precedent =$_GET['page']-1;
+		$suivant = $_GET['page']+1;
+		if($precedent>0){
+			$precedent = $_GET['page']-1;
+		}else{
+			$precedent =  $_GET['page'];
+		}
+		if($suivant<$nombre_page ){
+			$suivant = $_GET['page']+1;
+		}else{
+			$suivant =$nombre_page;
+		}
+	
+	$output .= '<div class="row mb-3 text-center">
+	<ul class="pagination justify-content-center">
+		<li class="page-item "><button class="page pag_selector " data-page="'. $precedent.'">Precedent</button></li>';
 
-			for($i=1;$nombre_page >= $i ;$i++)
-			{
+		for($i=1;$nombre_page >= $i ;$i++)
+		{
+			if($i == ($_GET['page']-1)or $i == ($_GET['page']-2)or $i == ($_GET['page']-3) or $i == ($_GET['page']+1)or $i == ($_GET['page']+2)or $i == ($_GET['page']+3)or $i == $_GET['page'] ){
+				if($i == ($_GET['page'])){
 					$output .= '
-						<li class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
+					<li class="page-item active"><button style="background-color: #09a9ff;color: #fff; " class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
+					';	
+				}else{
+
+					$output .= '
+					<li class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
 					';
+				}
 			}
+		}
+	$output.='
+			<li class="page-item "><button class="page pag_selector " data-page="'. $suivant.'">Suivant</button></li>
+		</ul>
+	</div>
+';	
+	}else{
+		$output = '<h3>No Data Found</h3>'; 
+		$output .= '<div>
+		<ul class="pagination justify-content-center">
+		<li class="page-item "><button class="page pag_selector " data-page="1">Precedent</button></li>';
+		
+		for($i=1;$nombre_page >= $i ;$i++)
+		{
+			if($i == ($_GET['page']-1)or $i == ($_GET['page']-2)or $i == ($_GET['page']-3) or $i == ($_GET['page']+1)or $i == ($_GET['page']+2)or $i == ($_GET['page']+3)){
+
+				$output .= '
+				<li style="display=none;"class="page-item "><button class="page pag_selector " data-page="'. $i .'">'.$i.'</button></li>
+				';
+			}
+		}
 		$output.='
-				<li class="page-item "><button class="page pag_selector " data-page="suivant">Suivant</button></li>
-			</ul>
-		</div>';
+		<li class="page-item "><button class="page pag_selector " data-page="1">Suivant</button></li>
+		</ul>
+		</div>
+		';	
 	}
-	else
-	{ $output = '<h3>No Data Found</h3>'; }
 	echo $output;
 }
 

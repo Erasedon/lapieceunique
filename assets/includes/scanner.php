@@ -1,39 +1,5 @@
-<?php
-// $client = new http\Client;
-// $request = new http\Client\Request;
 
-// $request->setRequestUrl('https://barcode-lookup.p.rapidapi.com/v3/products');
-// $request->setRequestMethod('GET');
-// $request->setHeaders([
-// 	'X-RapidAPI-Host' => 'barcode-lookup.p.rapidapi.com',
-// 	'X-RapidAPI-Key' => 'fe712b4d1fmshdc341191def35eep1d0674jsn6013aa6ea166'
-// ]);
-
-// $client->enqueue($request)->send();
-// $response = $client->getResponse();
-
-// echo $response->getBody();
-
-
-// $request = new HttpRequest();
-// $request->setUrl('https://barcode-lookup.p.rapidapi.com/v3/products');
-// $request->setMethod(HTTP_METH_GET);
-
-// $request->setHeaders([
-// 	'X-RapidAPI-Host' => 'barcode-lookup.p.rapidapi.com',
-// 	'X-RapidAPI-Key' => 'fe712b4d1fmshdc341191def35eep1d0674jsn6013aa6ea166'
-// ]);
-
-// try {
-// 	$response = $request->send();
-
-// 	echo $response->getBody();
-// } catch (HttpException $ex) {
-// 	echo $ex;
-// }
-
-?>
-
+          
 <div class="container">
     <div class="inscription">
         <h3>Scanner :</h3>
@@ -42,22 +8,35 @@
 
         <form method="post" action="assets/includes/traitement/traitementscanner.php" id="formajax">
             <div class="model_un">
-				<div class="nom">
-					<label for="">Code barre :</label>
-                    <input type="text" name="cb" required>
-                </div>
-
-            <!-- <div class="model_deux">
-                <label for=""></label>
-                <input type="file" name="ci" required>
-            </div> -->
+			 <div>
+                <a class="sub" id="startButton">Start</a>
+                <a class="sub" id="resetButton">Reset</a>
+            </div>
 			</div>
-          
+         
+
+            <div>
+                <video id="video" class="model_deux" style="border: 1px solid gray ;"></video>
+            </div>
+
+            <div id="sourceSelectPanel" style="display:none">
+                <label for="sourceSelect">Change video source:</label>
+                <select id="sourceSelect" style="max-width:400px">
+                </select>
+            </div>
+
+            
             <div class="model_deux">
                 <label for=""></label>
-            
+            <div class="nom">
+                    <!-- <label for="">Code barre :</label> -->
+                    <label>Result:</label>
+                    <input type="text" id="result" name="cb">
+                </div>
             </div>
-            <input type="submit" class="sub" value="Valider">
+            <input type="submit" class="btn-secondary" value="Valider">
         </form>
     </div>
 </div>
+
+

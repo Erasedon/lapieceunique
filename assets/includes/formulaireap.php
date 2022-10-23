@@ -3,16 +3,14 @@
 
 if ((!empty($_GET['id_article'])))
 {
-    $sql = "SELECT * FROM articles a, genres g, categories c, sous_categories sc WHERE id_articles = :id_articles";
+    $sql = "SELECT * FROM articles a, genres g,images i, categories c, sous_categories sc 
+	WHERE a.id_genres = g.id_genres AND a.id_categories = c.id_categories AND a.id_sous_categories = sc.id_sous_categories AND  a.id_articles = i.id_articles and a.id_articles = :id_articles";
     $prepare = $db->prepare($sql);   
     $prepare ->execute(array(':id_articles' => $_GET['id_article']));
     $result = $prepare->fetch();
 
 
-    $sql1 = "SELECT * FROM stocks WHERE id_articles = :id_articles";
-    $prepare1 = $db->prepare($sql1);   
-    $prepare1 ->execute(array(':id_articles' => $_GET['id_article']));
-    $result1 = $prepare1->fetch();
+  
     
     $reqgenres = "SELECT * FROM genres";
     $preparegenres = $db->prepare($reqgenres);   
@@ -32,11 +30,11 @@ if ((!empty($_GET['id_article'])))
 
 <div class="container">
     <div class="inscription">
-        <h3> D'ajout de poster :</h3>
+        <h3> Modifier le poster :</h3>
 
         <div class="error"></div>
 
-        <form method="post" action="assets/includes/traitement/traitementmod.php?id_articles=<?php echo $result['id_articles'] ?>" id="formajax">
+        <form method="post" action="assets/includes/traitement/traitementmod.php?id_articles=<?php echo $result['id_articles'] ?>" id="formajax" enctype="multipart/form-data">
             <div class="model_deux">
                 <label for="">Nom du Produit:</label>
                 <input type="text" name="nomap" value="<?php echo $result['nom_articles'] ?>" required>
@@ -61,7 +59,14 @@ if ((!empty($_GET['id_article'])))
             </div>
             <div class="model_deux">
                 <label for="">Quantité :</label>
-                <input type="text" name="Quantite" value="<?php echo $result1['quantite_stock'] ?>" required>
+                <input type="text" name="Quantite" value="<?php echo $result['quantite_articles'] ?>" required>
+            </div>
+            <div class="model_deux">
+                <label for="">photo du produit :</label>
+                <img style="max-width:200px" src="<?php echo $result['url_images']; ?>">
+            </div>
+            <div class="model_deux">
+                <input type="file" name="file" >
             </div>
             <div class="row g-3">
             <div class="col-md">
@@ -75,7 +80,7 @@ if ((!empty($_GET['id_article'])))
                                 if($result['nom_genres'] === $row['nom_genres']){
                                 
                                 ?>
-                                    <option selected><?php echo $row['nom_genres'] ?></option>
+                                    <option value="<?php echo $row['id_genres'] ?>" selected><?php echo $row['nom_genres'] ?></option>
                                 <?php
                                 }
                                 ?>
@@ -97,7 +102,7 @@ if ((!empty($_GET['id_article'])))
                                 if($result['nom_categories'] === $row['nom_categories']){
                                 
                                     ?>
-                                        <option selected><?php echo $row['nom_categories'] ?></option>
+                                        <option value="<?php echo $row['id_categories'] ?>" selected><?php echo $row['nom_categories'] ?></option>
                                     <?php
                                     }
                                     ?>
@@ -120,7 +125,7 @@ if ((!empty($_GET['id_article'])))
                                 if($result['nom_sous_categories'] === $row['nom_sous_categories']){
                                 
                                     ?>
-                                        <option selected><?php echo $row['nom_sous_categories'] ?></option>
+                                        <option value="<?php echo $row['id_sous_categories'] ?>" selected><?php echo $row['nom_sous_categories'] ?></option>
                                     <?php
                                     }
                                     ?>
@@ -132,28 +137,45 @@ if ((!empty($_GET['id_article'])))
                         <label for="floatingSelectGrid">listes des sous_categories</label>
                     </div>
                 </div>
-            </div>
-            <div class="model_un">
-                <!-- <div class="nom">
-                    <label for="">Code barre :</label>
-                    <input type="file" name="cbpap" required>
-                </div> -->
-                <div class="prenom">
-                    <label for="">Code barre :</label>
-                    <input type="text" name="barretxtap" value="<?php echo $result['cbp_articles'] ?>" required>
+            </div> 
+            <div class="model_deux">
+               
+               </div>
+             <div class="row g-2">
+            <div class="col-md">
+                    <div class="form-floating">
+                         <a id="startButton"><button class="btn btn-outline-secondary" type="button">Start</button></a>
+                        <a  id="resetButton"><button class="btn btn-outline-secondary" type="button">  Reset</button></a>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating">
+                            <div id="sourceSelectPanel" style="display:none">
+                                 <label for="sourceSelect">Change video source:</label>
+                                 <select id="sourceSelect" style="max-width:400px">
+                                </select>
+                            </div>
+                    </div>
                 </div>
             </div>
+            <div>
+                <label for="">Code barre :</label>          
+                <input type="text" id="result" name="barretxtap"  required>
+           </div>
 
-
-            <div class="model_deux">
-                <label for=""></label>
-
+            <div class="model_deux">    
+                <video id="video" style="border: 1px solid gray; max-width:250px"></video>
+            </div>    
+           
+           <div class="model_deux">
+               
             </div>
             <input type="submit" class="sub" value="Enregistrer">
-            <button type="submit" class="sub">
-                <a style="text-decoration: none" href="poster.php?id_article=<?php echo $result['id_articles'] ?>"><i
-                        class='fa-solid fa-bag-shopping'></i> Retour </a>
+              <a style="text-decoration: none" href="poster.php?id_article=<?php echo $result['id_articles'] ?>">
+              <button type="button" class="sub">
+               Retour 
             </button>
+            </a>
         </form>
     </div>
 </div>
@@ -182,7 +204,7 @@ if ((!empty($_GET['id_article'])))
 
         <div class="error"></div>
 
-        <form method="post" action="assets/includes/traitement/traitementajout.php" id="formajax">
+        <form method="post" action="assets/includes/traitement/traitementajout.php" id="formajax" enctype="multipart/form-data">
             <div class="model_deux">
                 <label for="">Nom du Produit:</label>
                 <input type="text" name="nomap" required>
@@ -208,7 +230,10 @@ if ((!empty($_GET['id_article'])))
                 <label for="">Quantité :</label>
                 <input type="text" name="Quantite" required>
             </div>
-
+            <div class="model_deux">
+                <label for="">photo du produit :</label>
+                 <input type="file" name="file" >
+            </div>
             <div class="row g-2">
                 <div class="col-md">
                     <div class="form-floating">
@@ -259,15 +284,27 @@ if ((!empty($_GET['id_article'])))
                 </div>
             </div>
             <div class="model_un">
-                <!-- <div class="nom">
+                <div class="nom">
                     <label for="">Code barre :</label>
-                    <input type="file" name="cbpap" required>
-                </div> -->
+                    <!-- <input type="file" name="cbpap" required> -->
+                <a class="sub" id="startButton">Start</a>
+                <a class="sub" id="resetButton">Reset</a>
+            </div>
+			</div> 
+             <div id="sourceSelectPanel" style="display:none">
+                <label for="sourceSelect">Change video source:</label>
+                <select id="sourceSelect" style="max-width:400px">
+                </select>
+            </div>
+            <div>
+                <video id="video" class="model_deux" style="border: 1px solid gray ;"></video>
+            </div>
+
+          
                 <div class="prenom">
                     <label for="">Code barre :</label>
-                    <input type="text" name="barretxtap" required>
+                    <input type="text"id="result" name="barretxtap" required>
                 </div>
-            </div>
 
 
             <div class="model_deux">

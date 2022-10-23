@@ -4,63 +4,52 @@
 
         var currentURL = document.URL;
 
-        const url = new URL(window.location);
-
         // // rechercher une valeur dans un url
 
-        function getParameterByName(name, url) {
+        function getParameterByName(name, currentURL) {
             name = name.replace(/[\[\]]/g, '\\$&'); // regex qui traite la chaine
             var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
+                results = regex.exec(currentURL);
             if (!results) return null;
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
 
-        var page = (getParameterByName('page') == null) ? 1  : getParameterByName('page');
-        var limit = (getParameterByName('limit') == null) ? 5 : getParameterByName('limit');
-          
+        var page=(getParameterByName('page')== null) ? 1 :getParameterByName('page');
+        var limit =(getParameterByName('limit')== null) ? 5 :getParameterByName('limit');
+       
+        
+        const url = new URL(window.location);
 
         filter_data(page, limit);
 
-        function filter_data(page=(url.searchParams.get('page')== null) ? 1  :url.searchParams.get('page') , limit=(url.searchParams.get('limit')== null) ? 5  :url.searchParams.get('limit') ) {
-
+        function filter_data(page = 1, limit = 5, brandresp,ramresp,storageresp) {
+          
             $('.filter_data').html('<div id="loading" style="" ></div>');
             var action = 'fetch_data';
             var minimum_price = $('#hidden_minimum_price').val();
             var maximum_price = $('#hidden_maximum_price').val();
-         
             var brand = get_filter('brand');
             var ram = get_filter('ram');
             var storage = get_filter('storage');
-
-
             var datas = {}
+            var brandresp;
+            var ramresp;
+            var storageresp;
+           console.log(brand);
 
-            if (action = !null) {
-                datas.action = action;
-            }
-            if (limit != null) {
-                datas.limit = limit;
-            }
-            if (page != null) {
-                datas.page = page;
-            }
-            if (minimum_price != "") {
-                datas.minimum_price = minimum_price;
-            }
-            if (maximum_price != "") {
-                datas.maximum_price = maximum_price;
-            }
-            if (brand != "") {
-                datas.brand = brand;
-            }
-            if (ram != "") {
-                datas.ram = ram;
-            }
-            if (storage != "") {
-                datas.storage = storage;
-            }
+           
+            if (action = !null) { datas.action = action;}
+            if (limit != null) { datas.limit = limit; }
+            if (page != null) {  datas.page = page; }
+            if (minimum_price != "") { datas.minimum_price = minimum_price;  }
+            if (maximum_price != "") { datas.maximum_price = maximum_price;}
+            if (brand != "") { datas.brand = brand;}
+            if (brandresp != null) { datas.brand = brandresp;}
+            if (ramresp != null) { datas.ram = ramresp;}
+            if (storageresp != null) { datas.storage = storageresp;}
+            if (ram != "") {datas.ram = ram; }
+            if (storage != "") { datas.storage = storage; }
 
             $.ajax({
                 url: "assets/includes/cards.php",
@@ -70,7 +59,6 @@
                     $('.filter_data').html(data);
                 }
             });
-
         }
 
         // recuperer la valeur des checkbox 
@@ -89,19 +77,32 @@
                     filter.push($(this).val());
                 });
 
-                
                 url.searchParams.set(class_name, filter.toString());         
                 history.pushState({}, '', url);
             }
             // on retourne le tableau sous la forme  d'une chaine de caractere 
             return filter.toString();
         }
-        
+
+          $('#brandresp').on('change', function() {
+            brandresp = document.getElementById('brandresp').value;
+              filter_data(page,limit,brandresp,ramresp,storageresp);
+            });  
+            $('#ramresp').on('change', function() {
+                ramresp= document.getElementById('ramresp').value;
+                  filter_data(page,limit,brandresp,ramresp,storageresp);
+                }); 
+             $('#storageresp').on('change', function() {
+                storageresp = document.getElementById('storageresp').value;
+                      filter_data(page,limit,brandresp,ramresp,storageresp);
+                    });
+          
         // onclick des checkbox du filtre 
         $('.common_selector').on('click', function() {
             filter_data();
         });
 
+       
         // onclick de la pagination des posters 
         $('.filter_data').on(
             'click',
@@ -109,8 +110,10 @@
             function(e) {
                 const page = $(e.target).data('page');
                 url.searchParams.set('page', page);
+                limitbase = 5;
+                const limit =(url.searchParams.get('limit')== null) ?  url.searchParams.set('limit', limitbase) :url.searchParams.get('limit');
                 history.pushState({}, '', url);
-                // var limit =url.searchParams.get('limit');
+          
                 filter_data(page, limit);
 
             });
@@ -118,10 +121,10 @@
         //onclick de la limite de nombre de posters afficher 
         $('.filter_data').on('click', '.limit_selector', function(e) {
             const limit = $(e.target).data('limit');
-            
+            pagebase = 1;
             url.searchParams.set('limit', limit);
+            const page =(url.searchParams.get('page')== null) ?  url.searchParams.set('page', pagebase):url.searchParams.get('page');
             history.pushState({}, '', url);
-            // var page =url.searchParams.get('page');
             filter_data(page, limit);
         });
 

@@ -23,6 +23,7 @@ toggleButton.onclick = function(){
 toggleButton.addEventListener('click', () => {;
     if(burger_opened) {
         toggleButton.classList.add('open-hamburger');
+        toggleButton = false;
     } else {
         toggleButton.classList.remove('open-hamburger')
         toggleButton = false
@@ -35,6 +36,7 @@ window.addEventListener('click', function(e){
           if (!navBar.contains(e.target) && window.innerWidth < 600){
             navLinks.style.display = "none"
             burger_opened = false;
+            toggleButton.classList.remove('open-hamburger')
           }
 
 })
@@ -45,6 +47,7 @@ window.addEventListener('resize', function(){
         navLinks.style.display = "flex"
         navBar.style.borderBottomLeftRadius = "0px"
         navBar.style.borderBottomRightRadius = "0px"
+        toggleButton.classList.remove('open-hamburger')
     }
     if (window.innerWidth < 600){
         navLinks.style.display = "none"

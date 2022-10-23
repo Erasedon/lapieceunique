@@ -18,7 +18,6 @@
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
     </script>
     <link href = "assets/css/jquery-ui.css" rel = "stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
     <link 
         rel="stylesheet" 
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
@@ -26,6 +25,9 @@
         crossorigin="anonymous" 
         referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+    <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
+
     
     <link rel="stylesheet" href="assets/css/style.css">
     <title>La piece unique</title>
@@ -38,6 +40,9 @@
     
     ?>
      <script src="assets/js/navbar.js"></script>
-     <script src="assets/js/scan.js"></script>
+     <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
+     <script type="text/javascript" src="assets\js\controllerscan.js"></script>
+    <script type="text/javascript" src="assets\js\scanner.js"></script>
 </body>
 </html>
+

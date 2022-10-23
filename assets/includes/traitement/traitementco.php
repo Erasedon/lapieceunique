@@ -17,6 +17,7 @@
                                 session_start();
                                 $_SESSION['role'] = $result['id_roles'];
                                 $_SESSION['mail'] = $result['mail_utilisateurs'];
+                                $_SESSION['nid'] = $result['id_utilisateurs'];
                        
                                 header("Location:../../../index.php");
                             }else{
