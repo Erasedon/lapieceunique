@@ -16,6 +16,13 @@
 
                         sourceSelect.onchange = () => {
                             selectedDeviceId = sourceSelect.value;
+                            codeReader.decodeOnceFromVideoDevice(selectedDeviceId, 'video').then((result) => {
+                                console.log(result)
+                                document.getElementById('result').setAttribute('value', textContent = result.text)
+                            }).catch((err) => {
+                                console.error(err)
+                                document.getElementById('result').textContent = err
+                            })
                         }
 
                         const sourceSelectPanel = document.getElementById('sourceSelectPanel')

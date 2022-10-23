@@ -40,6 +40,7 @@
     
     ?>
      <script src="assets/js/navbar.js"></script>
+     <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
      <script type="text/javascript" src="assets\js\controllerscan.js"></script>
     <script type="text/javascript" src="assets\js\scanner.js"></script>
 </body>

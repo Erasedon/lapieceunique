@@ -9,8 +9,6 @@ $prepare ->execute();
 $result = $prepare->fetch();
 
 
-
-
 $reqgenres = "SELECT * FROM genres";
 $preparegenres = $db->prepare($reqgenres);   
 $preparegenres ->execute();
@@ -31,10 +29,8 @@ $resultcat = $preparecat->fetchALL();
             <div class="col-md">
                     <div class="form-floating">
                         <select id="brandresp" name="selgenres"  class="form-select" id="floatingSelectGrid">
-                            <option >liste des genres</option>
+                            <option value="0">liste des genres</option>
                             <?php
-                            
-                           
                             foreach ($resultgenres as $row) {
                                                             
                                 ?>
@@ -50,7 +46,7 @@ $resultcat = $preparecat->fetchALL();
                     <div class="form-floating">
                         <select id="ramresp" name="selcat" class="form-select" id="floatingSelectGrid">
                            
-                            <option >liste des categories</option>
+                            <option value="0">liste des categories</option>
                             <?php
                             foreach ($resultcat as $row) {
                                                                ?>
@@ -66,7 +62,7 @@ $resultcat = $preparecat->fetchALL();
                 <div class="col-md">
                     <div class="form-floating">
                         <select id="storageresp" name="selsouscat" class="form-select" id="floatingSelectGrid">
-                            <option >liste des sous_categories</option>
+                            <option value="0">liste des sous_categories</option>
                             <?php
                          
                             foreach ($resultsouscat as $row) {
@@ -86,8 +82,8 @@ $resultcat = $preparecat->fetchALL();
 
 </div>
 <div class="container-fluid">
-     <div class="container-filtre-tb col-6 col-lg-4">
-        <div id="filtredesktop">
+    <div class="container-filtre-tb col-6 col-lg-4">
+             <div id="filtredesktop">
             <!-- filtre -->
             <div class="filtre">
 
@@ -198,7 +194,7 @@ $resultcat = $preparecat->fetchALL();
             </div>
 
         </div>
-
+        <div class="b-example-divider b-example-vr"></div>
         <div class="col-sm-6 col-lg-8">
             <br />
             <div class="row filter_data">
