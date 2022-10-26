@@ -85,15 +85,24 @@
         }
 
           $('#brandresp').on('change', function() {
-            brandresp = document.getElementById('brandresp').value;
+            brandrespe = document.getElementById('brandresp').value;
+            const brandresp = url.searchParams.set('genres', brandrespe);
+            console.log(brandresp);
+            history.pushState({}, '', url);
+          
               filter_data(page,limit,brandresp,ramresp,storageresp);
             });  
             $('#ramresp').on('change', function() {
                 ramresp= document.getElementById('ramresp').value;
+                url.searchParams.set("ram", ramresp);         
+                history.pushState({}, '', url);
                   filter_data(page,limit,brandresp,ramresp,storageresp);
                 }); 
              $('#storageresp').on('change', function() {
                 storageresp = document.getElementById('storageresp').value;
+                url.searchParams.set("storage", storageresp);   
+                   
+                history.pushState({}, '', url);
                       filter_data(page,limit,brandresp,ramresp,storageresp);
                     });
           
